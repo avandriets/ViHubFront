@@ -1,14 +1,71 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>ViHubFront</title>
   <base href="/">
+  <meta charset="utf-8">
+  <title>ViHub</title>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.min.css">
+  <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/css/fabric.components.min.css">
+  <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/6.0.0/css/fabric.min.css">
+
 </head>
+
 <body>
-  <app-root>Loading...</app-root>
+
+<app-root>Loading...</app-root>
+
+<script src="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-js/1.4.0/js/fabric.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+  (function ($) {
+    $.fn.TextField = function () {
+
+      /** Iterate through each text field provided. */
+      return this.each(function () {
+
+        /** Does it have a placeholder? */
+        if ($(this).hasClass("ms-TextField--placeholder")) {
+
+          /** Hide the label on click. */
+          $(this).on('click', function () {
+            $(this).find('.ms-Label').hide();
+          });
+
+          /** Hide the label on focus. */
+          $(this).find('.ms-TextField-field').on('focus', function () {
+            $(this).siblings('.ms-Label').hide();
+          });
+
+          /** Show the label again when leaving the field. */
+          $(this).find('.ms-TextField-field').on('blur', function () {
+
+            /** Only do this if no text was entered. */
+            if ($(this).val().length === 0) {
+              $(this).siblings('.ms-Label').show();
+            }
+          });
+        }
+
+        /** Underlined - adding/removing a focus class */
+        if ($(this).hasClass('ms-TextField--underlined')) {
+
+          /** Add is-active class - changes border color to theme primary */
+          $(this).find('.ms-TextField-field').on('focus', function () {
+            $(this).parent('.ms-TextField--underlined').addClass('is-active');
+          });
+
+          /** Remove is-active on blur of textfield */
+          $(this).find('.ms-TextField-field').on('blur', function () {
+            $(this).parent('.ms-TextField--underlined').removeClass('is-active');
+          });
+        }
+
+      });
+    };
+  })(jQuery);
+
+</script>
 </body>
+
 </html>

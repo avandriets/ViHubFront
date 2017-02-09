@@ -11,18 +11,14 @@ import {LoginService} from '../login.service';
 })
 export class LoginComponent {
 
+  hasError: boolean = false;
+  errorMessage: string = '';
+
   constructor(public router: Router, private loginService: LoginService) {
   }
 
   login(event, username, password) {
     event.preventDefault();
-
-    // this.loginService.login(username, password)
-    //   .then(() => {
-    //       console.log('OK!!!');
-    //     }).catch((error)=> {
-    //     console.log(error);
-    // });
 
     this.loginService.login(username, password)
       .subscribe(
@@ -31,8 +27,25 @@ export class LoginComponent {
           this.router.navigateByUrl('/dashboard');
         },
         error => {
-          alert(error);
+          this.hasError = true;
+          this.SetError(error);
         }
       );
+  }
+
+  SetError(error: any): void {
+    if (error != null) {
+      this.hasError = true;
+
+      let error_detail = JSON.parse(error);
+      if (error_detail.error_description) {
+        this.errorMessage = error_detail.error_description;
+      } else {
+        this.errorMessage = "Ошибка " + error;
+      }
+
+    } else {
+      this.hasError = false;
+    }
   }
 }

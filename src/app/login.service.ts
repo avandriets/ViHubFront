@@ -12,41 +12,12 @@ export class LoginService {
   constructor(public http: Http) {
   }
 
-  // login(username, password): Promise<any> {
-  //
-  //   const url = this.OauthLoginEndPointUrl;
-  //
-  //   let params: URLSearchParams = new URLSearchParams();
-  //   params.set('username', username);
-  //   params.set('password', password);
-  //   params.set('grant_type', 'password');
-  //
-  //   let headers = new Headers(
-  //     {
-  //       'Content-Type': 'application/json',
-  //       'Accept': '*/*',
-  //       'Access-Control-Allow-Origin': '*'
-  //     }
-  //   );
-  //
-  //   headers.append('Authorization', 'Basic ' + btoa(this.clientId + ':' + this.clientSecret));
-  //   let options = new RequestOptions({headers: headers});
-  //
-  //
-  //   return this.http
-  //     .post(url, params, options)
-  //     .toPromise()
-  //     .then(res => res.json())
-  //     .catch(this.handleError);
-  // }
-
   login(username, password): Observable<any> {
 
     let headers = new Headers(
       {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': '*/*',
-        // 'Access-Control-Allow-Origin': '*'
       }
     );
 
@@ -57,8 +28,6 @@ export class LoginService {
     let params: URLSearchParams = new URLSearchParams();
     params.set('username', username);
     params.set('password', password);
-    // params.set('client_id', this.clientId);
-    // params.set('client_secret', this.clientSecret);
     params.set('grant_type', 'password');
 
     return this.http.post(
@@ -77,7 +46,7 @@ export class LoginService {
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
-    let errMsg = (error.message) ? error.message :
+    let errMsg = (error._body) ? error._body :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);

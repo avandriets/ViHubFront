@@ -1,14 +1,53 @@
-<div class="login jumbotron center-block">
-  <h1>Login</h1>
-  <form role="form" (submit)="login($event, username.value, password.value)">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" #username class="form-control" id="username" placeholder="Username">
+<div class="login-page">
+  <div class="ms-Grid">
+    <div class="ms-Grid-row">
+      <div class="ms-Grid-col ms-u-sm12 ms-u-lgOffset6 ms-u-lg6 ms-u-xlOffset8 ms-u-xl4 ms-bgColor-white login-page-block">
+        <div>
+          <h1 class="ms-font-su">ViHub</h1>
+
+          <div *ngIf="hasError">
+            <br>
+            <div class="ms-MessageBar ms-MessageBar--error">
+              <div class="ms-MessageBar-content">
+                <div class="ms-MessageBar-icon">
+                  <i class="ms-Icon ms-Icon--xCircle"></i>
+                </div>
+                <div class="ms-MessageBar-text">
+                  {{ errorMessage }}
+                </div>
+              </div>
+            </div>
+            <br>
+          </div>
+
+          <form action="" method="post" (submit)="login($event, username.value, password.value)">
+            <div class="ms-TextField">
+              <label class="ms-Label ms-fontSize-m">E-mail</label>
+              <input class="ms-TextField-field" #username type="email" placeholder="Адрес электронной почты">
+            </div>
+
+            <div class="ms-TextField">
+              <label class="ms-Label ms-fontSize-m">Пароль</label>
+              <input class="ms-TextField-field" #password type="password" placeholder="Пароль">
+            </div>
+
+            <div class="ms-TextField">
+              <button type="submit" class="ms-Button ms-Button--primary"><span class="ms-Button-label">Вход</span></button>
+            </div>
+          </form>
+
+          <div class="ms-TextField ms-fontSize-mPlus">Войти используя учетную запись Office365.</div>
+          <div class="ms-TextField ms-CommandButton">
+            <button class="ms-CommandButton-button" onclick="window.location.href='#'">
+              <span class="ms-CommandButton-icon ms-fontColor-red"><i class="ms-Icon ms-Icon--OfficeLogo"></i></span><span class="ms-CommandButton-label">Office365</span>
+            </button>
+          </div>
+          <div>
+            <a class="ms-Link" href="#">Регистрация нового пользователя</a>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" #password class="form-control" id="password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-  </form>
+  </div>
 </div>
