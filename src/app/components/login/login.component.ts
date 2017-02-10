@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
-import {LoginService} from '../login.service';
+import {LoginService} from '../../services/login.service';
+import {Utils} from "../../classes/utility/utils";
 
 @Component({
   selector: 'my-login',
@@ -24,13 +25,28 @@ export class LoginComponent {
       .subscribe(
         response => {
           localStorage.setItem('token', response.access_token);
-          this.router.navigateByUrl('/dashboard');
+          this.getCurrentUser(response.access_token);
         },
         error => {
           this.hasError = true;
           this.SetError(error);
         }
       );
+  }
+
+  getCurrentUser(token): void {
+
+    this.loginService.getCurrentUser(token).subscribe(
+      response => {
+        localStorage.setItem('user', JSON.stringify(response));
+        this.router.navigateByUrl('/dashboard');
+      },
+      error => {
+        this.hasError = true;
+        this.SetError(error);
+      }
+    );
+
   }
 
   SetError(error: any): void {

@@ -19,8 +19,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "css/reset200802.css",
-        "sass/app.css"
+        "css/reset200802.css"
       ],
       "scripts": [],
       "environments": {

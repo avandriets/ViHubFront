@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Http, URLSearchParams, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
+import {Utils} from "../classes/utility/utils";
+import {UserVi} from "../classes/base-objects/user-vi";
 
 
 @Injectable()
 export class LoginService {
-  private OauthLoginEndPointUrl = 'http://127.0.0.1:8000/o/token/';  // Oauth Login EndPointUrl to web API
+
   private clientId = 'Z7Oj673sDxuuBsMrjWhAWjYrSsjAwd9DrvXjlvRA';
   private clientSecret = 'AHXWlxNobhoeXNekCj6snTzMsVKRJ5DKqfNHOIdab9lf7xuUZqZxNvYfTJTlvvK8nCjUtUISDa29x5wFH0pqfrLrMGDl2x4H1x7JftmnXajMZ5O75PbOEBGNJFPZG9ER';
 
@@ -21,9 +23,9 @@ export class LoginService {
       }
     );
 
-    headers.append('Authorization', 'Basic ' + btoa(this.clientId+':'+this.clientSecret));
+    headers.append('Authorization', 'Basic ' + btoa(this.clientId + ':' + this.clientSecret));
 
-    let options = new RequestOptions({ headers: headers });
+    let options = new RequestOptions({headers: headers});
 
     let params: URLSearchParams = new URLSearchParams();
     params.set('username', username);
@@ -31,10 +33,10 @@ export class LoginService {
     params.set('grant_type', 'password');
 
     return this.http.post(
-      this.OauthLoginEndPointUrl,
+      Utils.OauthLoginEndPointUrl,
       params,
       options
-      ).map(this.handleData)
+    ).map(this.handleData)
       .catch(this.handleError);
   }
 
@@ -54,5 +56,28 @@ export class LoginService {
 
   public logout() {
     localStorage.removeItem('token');
+  }
+
+  getCurrentUser(token): Observable<UserVi> {
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
+        'Authorization':'Bearer ' + token,
+      }
+    );
+
+    let options = new RequestOptions({headers: headers});
+
+    return this.http.get(Utils.getCurrentUserURL
+                 ,options).map(this.handleUserData)
+                   .catch(this.handleError);
+
+  }
+
+  private handleUserData(res: Response) {
+    let user = res.json() as UserVi;
+    return user;
   }
 }

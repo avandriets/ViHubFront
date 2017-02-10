@@ -1,8 +1,8 @@
-import {NgModule, ModuleWithProviders} from '@angular/core';
+import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {CanActivateViaOAuthGuard} from "./can-activate-via-oauth-guard";
-import {DashboardComponent} from "./dashboard/dashboard.component";
-import {LoginComponent} from "./login/login.component";
+import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   {
@@ -20,12 +20,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 ];
-
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule],
-//   providers: []
-// })
 
 // Export routes
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

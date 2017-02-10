@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LoginComponent } from './login/login.component';
-import {CanActivateViaOAuthGuard} from "./can-activate-via-oauth-guard";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
 
 import { routing } from './app-routing.module';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
