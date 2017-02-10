@@ -1,3 +1,54 @@
-<p>
-  navigation-bar works!
-</p>
+<header>
+  <div class="th-Header-banner">
+    <div class="ms-CommandBar-sideCommands ms-u-hiddenMdDown">
+      <div class="ms-CommandButton  ms-CommandButton--noLabel ms-u-hiddenSm">
+        <button class="ms-CommandButton-button">
+          <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Settings"></i></span><span class="ms-CommandButton-label"></span>
+        </button>
+      </div>
+      <div class="ms-CommandButton  ms-CommandButton--noLabel ms-u-hiddenSm">
+        <button class="ms-CommandButton-button" onclick="window.location.href='#'">
+          <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Help"></i></span><span class="ms-CommandButton-label"></span>
+        </button>
+      </div>
+      <div class="ms-CommandButton  ms-CommandButton--dropdown  ">
+        <button class="ms-CommandButton-button ms-Persona">
+          <div class="ms-Persona-imageArea">
+            <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Contact"></i></span>
+          </div>
+          <div class="ms-CommandButton-label ms-Persona-details ">
+            <div class="ms-Persona-primaryText">{{ email }}</div>
+          </div>
+        </button>
+        <ul class="ms-ContextualMenu  is-opened ms-ContextualMenu--hasIcons">
+          <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
+          <li class="ms-ContextualMenu-item ">
+            <a class="ms-ContextualMenu-link " href="#" tabindex="1">Изменить профиль</a>
+            <i class="ms-Icon ms-Icon--Repair "></i>
+          </li>
+
+          <!--{% if user.provider == 'D' %}-->
+          <!--<li class="ms-ContextualMenu-item">-->
+          <!--<a class="ms-ContextualMenu-link" href="{% url 'connect:disconnect' %}">Выход</a>-->
+          <!--<i class="ms-Icon ms-Icon&#45;&#45;Door "></i>-->
+          <!--</li>-->
+          <!--{% else %}-->
+          <li class="ms-ContextualMenu-item">
+            <a href="/" (click)="loginService.logout()" class="ms-ContextualMenu-link">Выход</a>
+            <i class="ms-Icon ms-Icon--Door "></i>
+          </li>
+          <!--{% endif %}-->
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="th-Header-logo">
+      <div class="">
+        <a class="th-Logo-link ms-font-xxl" href="/">
+          ViHub
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

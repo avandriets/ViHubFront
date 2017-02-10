@@ -8,8 +8,8 @@ import {UserVi} from "../classes/base-objects/user-vi";
 @Injectable()
 export class LoginService {
 
-  private clientId = 'Z7Oj673sDxuuBsMrjWhAWjYrSsjAwd9DrvXjlvRA';
-  private clientSecret = 'AHXWlxNobhoeXNekCj6snTzMsVKRJ5DKqfNHOIdab9lf7xuUZqZxNvYfTJTlvvK8nCjUtUISDa29x5wFH0pqfrLrMGDl2x4H1x7JftmnXajMZ5O75PbOEBGNJFPZG9ER';
+  private key1 = 'Z7Oj673sDxuuBsMrjWhAWjYrSsjAwd9DrvXjlvRA';
+  private key2 = 'AHXWlxNobhoeXNekCj6snTzMsVKRJ5DKqfNHOIdab9lf7xuUZqZxNvYfTJTlvvK8nCjUtUISDa29x5wFH0pqfrLrMGDl2x4H1x7JftmnXajMZ5O75PbOEBGNJFPZG9ER';
 
   constructor(public http: Http) {
   }
@@ -23,7 +23,7 @@ export class LoginService {
       }
     );
 
-    headers.append('Authorization', 'Basic ' + btoa(this.clientId + ':' + this.clientSecret));
+    headers.append('Authorization', 'Basic ' + btoa(this.key1 + ':' + this.key2));
 
     let options = new RequestOptions({headers: headers});
 
@@ -48,14 +48,12 @@ export class LoginService {
   private handleError(error: any) {
     // In a real world app, we might use a remote logging infrastructure
     // We'd also dig deeper into the error to get a better message
+    // let errMsg = (error.message) ? error.message :
     let errMsg = (error._body) ? error._body :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
-  }
-
-  public logout() {
-    localStorage.removeItem('token');
   }
 
   getCurrentUser(token): Observable<UserVi> {
@@ -64,15 +62,15 @@ export class LoginService {
       {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': '*/*',
-        'Authorization':'Bearer ' + token,
+        'Authorization': 'Bearer ' + token,
       }
     );
 
     let options = new RequestOptions({headers: headers});
 
     return this.http.get(Utils.getCurrentUserURL
-                 ,options).map(this.handleUserData)
-                   .catch(this.handleError);
+      , options).map(this.handleUserData)
+      .catch(this.handleError);
 
   }
 
@@ -80,4 +78,10 @@ export class LoginService {
     let user = res.json() as UserVi;
     return user;
   }
+
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
 }

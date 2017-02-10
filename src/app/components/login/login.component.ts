@@ -1,21 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 import {LoginService} from '../../services/login.service';
-import {Utils} from "../../classes/utility/utils";
+import {Utils, isLoggedin} from "../../classes/utility/utils";
 
 @Component({
-  selector: 'my-login',
+  selector: 'vihub-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
   providers: [LoginService]
 })
-export class LoginComponent {
+
+export class LoginComponent implements OnInit {
 
   hasError: boolean = false;
   errorMessage: string = '';
+  siteName: string = '';
 
   constructor(public router: Router, private loginService: LoginService) {
+  }
+
+  ngOnInit(): void {
+    this.siteName = Utils.siteName;
   }
 
   login(event, username, password) {
@@ -50,18 +55,24 @@ export class LoginComponent {
   }
 
   SetError(error: any): void {
+
     if (error != null) {
       this.hasError = true;
 
-      let error_detail = JSON.parse(error);
-      if (error_detail.error_description) {
-        this.errorMessage = error_detail.error_description;
-      } else {
-        this.errorMessage = "Ошибка " + error;
+      try {
+        let error_detail = JSON.parse(error);
+        if (error_detail.error_description) {
+          this.errorMessage = error_detail.error_description;
+        } else {
+          this.errorMessage = "Ошибка " + error;
+        }
+      } catch (e) {
+        this.errorMessage = "Ошибка сервера";
       }
 
     } else {
       this.hasError = false;
     }
+
   }
 }
