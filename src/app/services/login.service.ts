@@ -68,7 +68,7 @@ export class LoginService {
 
     let options = new RequestOptions({headers: headers});
 
-    return this.http.get(Utils.getCurrentUserURL
+    return this.http.get(Utils.meUserURL
       , options).map(this.handleUserData)
       .catch(this.handleError);
 

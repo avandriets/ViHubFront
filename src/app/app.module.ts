@@ -10,13 +10,15 @@ import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
 
 import { routing } from './app-routing.module';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { ElementsListComponent } from './components/elements/elements-list/elements-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    ElementsListComponent
   ],
   imports: [
     BrowserModule,
