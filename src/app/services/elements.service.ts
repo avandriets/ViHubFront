@@ -1,16 +1,27 @@
 import {Injectable} from '@angular/core';
 import {ElementVi} from "../classes/base-objects/element-vi";
 import {Utils} from "../classes/utility/utils";
-import {URLSearchParams, Http, Headers} from "@angular/http";
+import {URLSearchParams, Http, Headers, RequestOptions} from "@angular/http";
 import {Favorite} from "../classes/base-objects/favorite";
 
 
 @Injectable()
 export class ElementsService {
 
-  private headers = new Headers({'Content-Type': 'application/json'});
+  headers: Headers;
+  cardView: boolean = true;
 
   constructor(private http: Http) {
+
+    let token = localStorage.getItem('token');
+
+    this.headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + token,
+      }
+    );
   }
 
   private handleError(error: any): Promise<any> {
@@ -42,8 +53,11 @@ export class ElementsService {
     let params = new URLSearchParams();
     params.set('parent', parent_param); // the user's search value
 
+    let options = new RequestOptions({headers: this.headers});
+    options.search = params;
+
     return this.http
-      .get(Utils.elementsUrl, {search: params})
+      .get(Utils.elementsUrl, options)
       .toPromise()
       .then((response) => {
         return response.json() as ElementVi[];
@@ -53,8 +67,10 @@ export class ElementsService {
 
   getFavorite(): Promise<Favorite[]> {
 
+    let options = new RequestOptions({headers: this.headers});
+
     return this.http
-      .get(Utils.favoriteUrl)
+      .get(Utils.favoriteUrl, options)
       .toPromise()
       .then((response) => {
         return response.json() as Favorite[];
