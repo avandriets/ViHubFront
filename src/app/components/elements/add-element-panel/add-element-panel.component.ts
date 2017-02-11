@@ -1,14 +1,14 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {BasePanel} from "../../classes/base-objects/base-panel";
-import {ElementVi} from "../../classes/base-objects/element-vi";
-import {TransportObject} from "../../classes/base-objects/transport-object";
-import {ElementsService} from "../../services/elements.service";
-import {WindowRef} from "../../services/window-ref.service";
-import {BaseObject} from "../../classes/base-objects/base-object";
+import {BasePanel} from "../../../classes/base-objects/base-panel";
+import {ElementVi} from "../../../classes/base-objects/element-vi";
+import {TransportObject} from "../../../classes/base-objects/transport-object";
+import {ElementsService} from "../../../services/elements.service";
+import {WindowRef} from "../../../services/window-ref.service";
+import {BaseObject} from "../../../classes/base-objects/base-object";
 
 @Component({
   selector: 'add-element-panel',
-  templateUrl: './add-element-panel.component.html'
+  templateUrl: 'add-element-panel.component.html'
 })
 
 

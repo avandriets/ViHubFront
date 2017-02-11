@@ -9,7 +9,7 @@ import {Favorite} from "../../classes/base-objects/favorite";
 import {ElementsService} from "../../services/elements.service";
 import {TransportObject} from "../../classes/base-objects/transport-object";
 import {Response} from "@angular/http";
-import {AddElementPanelComponent} from "../add-element-panel/add-element-panel.component";
+import {AddElementPanelComponent} from "../elements/add-element-panel/add-element-panel.component";
 
 @Component({
   selector: 'app-dashboard',
