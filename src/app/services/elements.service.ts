@@ -151,7 +151,7 @@ export class ElementsService {
     const url = `${Utils.elementsUrl}${currentElement.element}/`;
 
     return this.http
-      .put(url, JSON.stringify(currentElement), {headers: this.headers})
+      .put(url, currentElement, {headers: this.headers})
       .toPromise()
       .then(() => currentElement)
       .catch(this.handleError);
