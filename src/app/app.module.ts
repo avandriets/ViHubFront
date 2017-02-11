@@ -11,6 +11,8 @@ import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
 import { routing } from './app-routing.module';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { ElementsListComponent } from './components/elements/elements-list/elements-list.component';
+import { AddElementPanelComponent } from './components/add-element-panel/add-element-panel.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ElementsListComponent } from './components/elements/elements-list/eleme
     DashboardComponent,
     LoginComponent,
     NavigationBarComponent,
-    ElementsListComponent
+    ElementsListComponent,
+    AddElementPanelComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {UserVi} from "../../classes/base-objects/user-vi";
 import {Utils} from "../../classes/utility/utils";
 import {LoginService} from "../../services/login.service";
@@ -8,6 +8,8 @@ import {ElementVi} from "../../classes/base-objects/element-vi";
 import {Favorite} from "../../classes/base-objects/favorite";
 import {ElementsService} from "../../services/elements.service";
 import {TransportObject} from "../../classes/base-objects/transport-object";
+import {Response} from "@angular/http";
+import {AddElementPanelComponent} from "../add-element-panel/add-element-panel.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +19,10 @@ import {TransportObject} from "../../classes/base-objects/transport-object";
 
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  //@ViewChild(AddElementPanelComponent) addPanelObject: AddElementPanelComponent;
+  hasError: boolean = false;
+  errorMessage: string = '';
+
+  @ViewChild(AddElementPanelComponent) addPanelObject: AddElementPanelComponent;
   elementsSet: ElementVi[] = [];
 
   favoriteSet: Favorite[] = [];
@@ -70,18 +75,22 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   getData(): void {
+
     this.elementService.getElements(-1).then((elements) => {
       this.elementsSet = elements;
       this.loading = false;
     }).catch((error) => {
-      console.log(error);
+      //console.log(error);
       this.error = error;
+      this.SetError(error);
       this.loading = false;
     });
+
     this.elementService.getFavorite().then((favorites) => {
       this.favoriteSet = favorites;
     }).catch((error) => {
-      console.log(error);
+      //console.log(error);
+      this.SetError(error);
       this.error = error;
     });
 
@@ -97,8 +106,34 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate(link);
   }
 
-  // openAddElement(): void {
-  //   this.addPanelObject.openPanel();
-  // }
+  SetError(error: Response): void {
+
+    if(error.status == 401){
+      this.loginService.logout();
+      this.router.navigateByUrl('/login');
+      return;
+    }
+
+    if (error != null) {
+      this.hasError = true;
+
+      try {
+
+        let error_detail = error.json().detail;
+        this.errorMessage = "Ошибка: " + error_detail;
+
+      } catch (e) {
+        this.errorMessage = "Ошибка сервера";
+      }
+
+    } else {
+      this.hasError = false;
+    }
+
+  }
+
+  openAddElement(): void {
+    this.addPanelObject.openPanel();
+  }
 
 }

@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ElementVi} from "../classes/base-objects/element-vi";
 import {Utils} from "../classes/utility/utils";
-import {URLSearchParams, Http, Headers, RequestOptions} from "@angular/http";
+import {URLSearchParams, Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Favorite} from "../classes/base-objects/favorite";
+import {UserVi} from "../classes/base-objects/user-vi";
+import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 
 @Injectable()
@@ -10,18 +13,46 @@ export class ElementsService {
 
   headers: Headers;
   cardView: boolean = true;
+  currentUser: UserVi;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public router: Router) {
 
     let token = localStorage.getItem('token');
 
     this.headers = new Headers(
       {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Accept': '*/*',
         'Authorization': 'Bearer ' + token,
       }
     );
+
+    let options = new RequestOptions({headers: this.headers});
+
+    this.http.get(Utils.meUserURL
+      , options).map(this.handleUserData)
+      .catch(this.handleUserDataError);
+  }
+
+  private handleUserData(res: Response) {
+    this.currentUser = res.json() as UserVi;
+  }
+
+  private handleUserDataError(error: any) {
+    // In a real world app, we might use a remote logging infrastructure
+    // We'd also dig deeper into the error to get a better message
+    // let errMsg = (error.message) ? error.message :
+    // let errMsg = (error._body) ? error._body :
+    if (error.status == 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.router.navigateByUrl('/login');
+      return;
+    }
+
+    let errMsg = error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+    console.error(errMsg); // log to console instead
+    return Observable.throw(errMsg);
   }
 
   private handleError(error: any): Promise<any> {
@@ -83,8 +114,21 @@ export class ElementsService {
     if (parentElement != null) {
       parent_el = parentElement.element;
     }
+
+    let options = new RequestOptions({headers: this.headers});
+
+    let data =
+      {
+        name: name,
+        description: description,
+        element_type: element_type,
+        parent: parent_el
+      };
+
     return this.http
-      .post(Utils.elementsUrl, JSON.stringify({name: name, description: description, element_type: element_type, parent: parent_el}), {headers: this.headers})
+      .post(Utils.elementsUrl,
+        data,
+        options)
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
