@@ -46,10 +46,10 @@ export class NavigationBarComponent implements OnInit, AfterViewInit {
       new this.winRef.nativeWindow.fabric['CommandButton'](CommandButtonElements[i]);
     }
 
-    var DropdownHTMLElements = document.querySelectorAll('.ms-Dropdown');
-    for (var i = 0; i < DropdownHTMLElements.length; ++i) {
-      var Dropdown = new this.winRef.nativeWindow.fabric['Dropdown'](DropdownHTMLElements[i]);
-    }
+    // var DropdownHTMLElements = document.querySelectorAll('.ms-Dropdown');
+    // for (var i = 0; i < DropdownHTMLElements.length; ++i) {
+    //   var Dropdown = new this.winRef.nativeWindow.fabric['Dropdown'](DropdownHTMLElements[i]);
+    // }
   }
 
 }

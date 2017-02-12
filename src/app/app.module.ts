@@ -13,6 +13,17 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { ElementsListComponent } from './components/elements/elements-list/elements-list.component';
 import { AddElementPanelComponent } from './components/elements/add-element-panel/add-element-panel.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { ElementDetailComponent } from './components/element-detail/element-detail.component';
+import { DeleteElementDialogComponent } from './components/elements/delete-element-dialog/delete-element-dialog.component';
+import { EditElementPanelComponent } from './components/elements/edit-element-panel/edit-element-panel.component';
+import { AddMessagePanelComponent } from './components/messages/add-message-panel/add-message-panel.component';
+import { DeleteMessageDialogComponent } from './components/messages/delete-message-dialog/delete-message-dialog.component';
+import { EditMessagePanelComponent } from './components/messages/edit-message-panel/edit-message-panel.component';
+import { AddNotePanelComponent } from './components/notes/add-note-panel/add-note-panel.component';
+import { EditNoteDialogComponent } from './components/notes/edit-note-dialog/edit-note-dialog.component';
+import { DeleteNoteDialogComponent } from './components/notes/delete-note-dialog/delete-note-dialog.component';
+import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
+import { ElementsListVarComponent } from './components/elements/elements-list-var/elements-list-var.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +33,18 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     NavigationBarComponent,
     ElementsListComponent,
     AddElementPanelComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ElementDetailComponent,
+    DeleteElementDialogComponent,
+    EditElementPanelComponent,
+    AddMessagePanelComponent,
+    DeleteMessageDialogComponent,
+    EditMessagePanelComponent,
+    AddNotePanelComponent,
+    EditNoteDialogComponent,
+    DeleteNoteDialogComponent,
+    BreadCrumbsComponent,
+    ElementsListVarComponent
   ],
   imports: [
     BrowserModule,

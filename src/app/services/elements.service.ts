@@ -29,31 +29,43 @@ export class ElementsService {
 
     let options = new RequestOptions({headers: this.headers});
 
-    this.http.get(Utils.meUserURL
-      , options).map(this.handleUserData)
-      .catch(this.handleUserDataError);
+    // this.http.get(Utils.meUserURL
+    //   , options).map(this.handleUserData)
+    //   .catch(this.handleUserDataError);
+
+    this.http
+      .get(Utils.meUserURL, options)
+      .toPromise()
+      .then((response) => {
+        this.currentUser = response.json() as UserVi;
+      })
+      .catch((err) => {
+        //this.handleError = err;
+        console.error(err); // log to console instead
+      });
+
   }
 
-  private handleUserData(res: Response) {
-    this.currentUser = res.json() as UserVi;
-  }
-
-  private handleUserDataError(error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    // let errMsg = (error.message) ? error.message :
-    // let errMsg = (error._body) ? error._body :
-    if (error.status == 401) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('/login');
-      return;
-    }
-
-    let errMsg = error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
-  }
+  // private handleUserData(res: Response) {
+  //   this.currentUser = res.json() as UserVi;
+  // }
+  //
+  // private handleUserDataError(error: any) {
+  //   // In a real world app, we might use a remote logging infrastructure
+  //   // We'd also dig deeper into the error to get a better message
+  //   // let errMsg = (error.message) ? error.message :
+  //   // let errMsg = (error._body) ? error._body :
+  //   if (error.status == 401) {
+  //     localStorage.removeItem('token');
+  //     localStorage.removeItem('user');
+  //     this.router.navigateByUrl('/login');
+  //     return;
+  //   }
+  //
+  //   let errMsg = error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+  //   console.error(errMsg); // log to console instead
+  //   return Observable.throw(errMsg);
+  // }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
@@ -64,8 +76,10 @@ export class ElementsService {
 
     const url = `${Utils.elementsUrl}${id}/`;
 
+    let options = new RequestOptions({headers: this.headers});
+
     return this.http
-      .get(url)
+      .get(url, options)
       .toPromise()
       .then((response) => {
 
@@ -154,6 +168,20 @@ export class ElementsService {
       .put(url, currentElement, {headers: this.headers})
       .toPromise()
       .then(() => currentElement)
+      .catch(this.handleError);
+  }
+
+  getBreadcrumbs(element: number): Promise<ElementVi[]> {
+    const url = `${Utils.elementsUrl}${element}/get-breadcrumbs/`;
+
+    let options = new RequestOptions({headers: this.headers});
+
+    return this.http
+      .get(url, options)
+      .toPromise()
+      .then((response) => {
+        return response.json();
+      })
       .catch(this.handleError);
   }
 
