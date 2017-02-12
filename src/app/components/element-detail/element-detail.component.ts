@@ -16,11 +16,13 @@ import {AddNotePanelComponent} from "../notes/add-note-panel/add-note-panel.comp
 import {EditNoteDialogComponent} from "../notes/edit-note-dialog/edit-note-dialog.component";
 import {DeleteNoteDialogComponent} from "../notes/delete-note-dialog/delete-note-dialog.component";
 import {LoginService} from "../../services/login.service";
+import {NotesService} from "../../services/notes.service";
+import {MessagesService} from "../../services/messages.service";
 
 @Component({
   selector: 'element-detail',
   templateUrl: './element-detail.component.html',
-  providers: [LoginService, WindowRef, ElementsService]
+  providers: [LoginService, WindowRef, ElementsService, NotesService, MessagesService]
 })
 
 export class ElementDetailComponent implements OnInit, AfterViewInit {
@@ -41,7 +43,8 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
 
   constructor(private elementService: ElementsService,
               private route: ActivatedRoute,
-              private winRef: WindowRef) {
+              private winRef: WindowRef,
+              private noteService: NotesService) {
   }
 
 
@@ -51,15 +54,15 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(EditElementPanelComponent) editPanelObject: EditElementPanelComponent;
 
   // //Message action
-  // @ViewChild(AddMessagePanelComponent) addMessageObjectPanel: AddMessagePanelComponent;
+  @ViewChild(AddMessagePanelComponent) addMessageObjectPanel: AddMessagePanelComponent;
   // @ViewChild(DeleteMessageDialogComponent) deleteMessageDialog: DeleteMessageDialogComponent;
   // @ViewChild(EditMessagePanelComponent) editMessagePanel: EditMessagePanelComponent;
   //
   //
-  // //Note action
-  // @ViewChild(AddNotePanelComponent) addNotePanel: AddNotePanelComponent;
-  // @ViewChild(EditNoteDialogComponent) editNoteDialog: EditNoteDialogComponent;
-  // @ViewChild(DeleteNoteDialogComponent) deleteNoteDialog: DeleteNoteDialogComponent;
+  //Note action
+  @ViewChild(AddNotePanelComponent) addNotePanel: AddNotePanelComponent;
+  @ViewChild(EditNoteDialogComponent) editNoteDialog: EditNoteDialogComponent;
+  @ViewChild(DeleteNoteDialogComponent) deleteNoteDialog: DeleteNoteDialogComponent;
 
   //USer action
   // @ViewChild(ViewMemberDialogComponent) membersViewDialog: ViewMemberDialogComponent;
@@ -67,12 +70,12 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
 
   // TODO add create message method
   onCreateMessage(): void {
-    // this.addMessageObjectPanel.openPanel();
+    this.addMessageObjectPanel.openPanel();
   }
 
   // TODO add create note message
   onAddNote(): void {
-    // this.addNotePanel.openPanel();
+    this.addNotePanel.openPanel();
   }
 
   openAddElement(): void {
@@ -147,13 +150,13 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
     // });
 
     //TODO add get Notes
-    // this.elementService.getNotes(this.element.element)
-    //     .then((retNotes) => {
-    //         this.notesSet = retNotes;
-    //         this.loading = false;
-    //     }).catch((error)=> {
-    //     this.error = error;
-    // });
+    this.noteService.getNotes(this.element.element)
+      .then((retNotes) => {
+        this.notesSet = retNotes;
+        this.loading = false;
+      }).catch((error) => {
+      this.error = error;
+    });
   }
 
   dataChange(changerData: TransportObject): void {

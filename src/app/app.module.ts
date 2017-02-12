@@ -24,6 +24,8 @@ import { EditNoteDialogComponent } from './components/notes/edit-note-dialog/edi
 import { DeleteNoteDialogComponent } from './components/notes/delete-note-dialog/delete-note-dialog.component';
 import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.component';
 import { ElementsListVarComponent } from './components/elements/elements-list-var/elements-list-var.component';
+import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
+import { MessagesListComponent } from './components/messages/messages-list/messages-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ElementsListVarComponent } from './components/elements/elements-list-va
     EditNoteDialogComponent,
     DeleteNoteDialogComponent,
     BreadCrumbsComponent,
-    ElementsListVarComponent
+    ElementsListVarComponent,
+    NotesListComponent,
+    MessagesListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,8 @@ export class Utils {
   public static meUserURL: string = Utils.baseURL + '/vi-hub/me';
   public static elementsUrl: string = Utils.baseURL + '/rest/elements/';
   public static favoriteUrl: string = Utils.baseURL + '/rest/element-favorite/';
+  public static noteUrl: string = Utils.baseURL + '/rest/notes/';
+  public static messageUrl: string = Utils.baseURL + '/rest/messages/';
 
   static getCurrentUser(): UserVi{
     let currUser: UserVi = JSON.parse(localStorage.getItem('user')) as UserVi;

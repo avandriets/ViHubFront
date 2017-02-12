@@ -3,16 +3,16 @@
 <!--<add-members-dialog [currentElement]="element"></add-members-dialog>-->
 
 <!--TODO Notes-->
-<!--<add-note-panel [parentElement]="element" (onAddNote)="dataChange($event)"></add-note-panel>-->
-<!--<edit-note-dialog (onSaveNote)="dataChange($event)"></edit-note-dialog>-->
-<!--<delete-note-dialog (onDeleteNote)="dataChange($event)"></delete-note-dialog>-->
+<add-note-panel [parentElement]="element" (onAddNote)="dataChange($event)"></add-note-panel>
+<edit-note-dialog (onSaveNote)="dataChange($event)"></edit-note-dialog>
+<delete-note-dialog (onDeleteNote)="dataChange($event)"></delete-note-dialog>
 
 <delete-element-dialog [deletedElement]="element" (onDeleteElement)="dataChange($event)"></delete-element-dialog>
 <add-element-panel [parentElement]="element" (onAddElement)="dataChange($event)"></add-element-panel>
 <edit-element-panel [editedElement]="element" (onEditElement)="dataChange($event)"></edit-element-panel>
 
 <!--TODO messages-->
-<!--<add-message-panel [parentElement]="element" (onAddMessage)="dataChange($event)"></add-message-panel>-->
+<add-message-panel [parentElement]="element" (onAddMessage)="dataChange($event)"></add-message-panel>
 <!--<delete-message-dialog (onDeleteMessage)="dataChange($event)"></delete-message-dialog>-->
 <!--<edit-message-panel (onSaveNote)="dataChange($event)"></edit-message-panel>-->
 
@@ -124,10 +124,10 @@
           </div>
 
           <!--TODO Notes list-->
-          <!--<notes-list [deleteNoteDialog]="deleteNoteDialog"-->
-          <!--[editNoteDialog]="editNoteDialog"-->
-          <!--[localNotes]="notesSet">Загрузка ...-->
-          <!--</notes-list>-->
+          <notes-list [deleteNoteDialog]="deleteNoteDialog"
+                      [editNoteDialog]="editNoteDialog"
+                      [localNotes]="notesSet">Загрузка ...
+          </notes-list>
 
           <h2 *ngIf="notesSet.length == 0" class="ms-font-xl">Нет заметок для отображения</h2>
         </div>
