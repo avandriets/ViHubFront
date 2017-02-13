@@ -13,6 +13,7 @@ export class Utils {
   public static favoriteUrl: string = Utils.baseURL + '/rest/element-favorite/';
   public static noteUrl: string = Utils.baseURL + '/rest/notes/';
   public static messageUrl: string = Utils.baseURL + '/rest/messages/';
+  static searchUrl: string = Utils.baseURL + '/vi-hub/search-user/';
 
   static getCurrentUser(): UserVi{
     let currUser: UserVi = JSON.parse(localStorage.getItem('user')) as UserVi;

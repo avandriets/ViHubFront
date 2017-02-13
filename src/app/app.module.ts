@@ -2,12 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
-
 import { routing } from './app-routing.module';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { ElementsListComponent } from './components/elements/elements-list/elements-list.component';
@@ -26,6 +24,8 @@ import { BreadCrumbsComponent } from './components/bread-crumbs/bread-crumbs.com
 import { ElementsListVarComponent } from './components/elements/elements-list-var/elements-list-var.component';
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { MessagesListComponent } from './components/messages/messages-list/messages-list.component';
+import { ViewMemberDialogComponent } from './components/members/view-member-dialog/view-member-dialog.component';
+import { AddMemberDialogComponent } from './components/members/add-member-dialog/add-member-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,9 @@ import { MessagesListComponent } from './components/messages/messages-list/messa
     BreadCrumbsComponent,
     ElementsListVarComponent,
     NotesListComponent,
-    MessagesListComponent
+    MessagesListComponent,
+    ViewMemberDialogComponent,
+    AddMemberDialogComponent
   ],
   imports: [
     BrowserModule,

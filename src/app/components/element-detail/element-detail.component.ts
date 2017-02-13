@@ -18,11 +18,14 @@ import {DeleteNoteDialogComponent} from "../notes/delete-note-dialog/delete-note
 import {LoginService} from "../../services/login.service";
 import {NotesService} from "../../services/notes.service";
 import {MessagesService} from "../../services/messages.service";
+import {AddMemberDialogComponent} from "../members/add-member-dialog/add-member-dialog.component";
+import {ViewMemberDialogComponent} from "../members/view-member-dialog/view-member-dialog.component";
+import {MembersService} from "../../services/members.service";
 
 @Component({
   selector: 'element-detail',
   templateUrl: './element-detail.component.html',
-  providers: [LoginService, WindowRef, ElementsService, NotesService, MessagesService]
+  providers: [LoginService, WindowRef, ElementsService, NotesService, MessagesService, MembersService]
 })
 
 export class ElementDetailComponent implements OnInit, AfterViewInit {
@@ -44,36 +47,36 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
   constructor(private elementService: ElementsService,
               private route: ActivatedRoute,
               private winRef: WindowRef,
-              private noteService: NotesService) {
+              private noteService: NotesService,
+              private messageService: MessagesService) {
   }
 
 
-  //Element action
+  //Element actions
   @ViewChild(DeleteElementDialogComponent) deleteElementDialog: DeleteElementDialogComponent;
   @ViewChild(AddElementPanelComponent) addPanelObject: AddElementPanelComponent;
   @ViewChild(EditElementPanelComponent) editPanelObject: EditElementPanelComponent;
 
-  // //Message action
+  // //Message actions
   @ViewChild(AddMessagePanelComponent) addMessageObjectPanel: AddMessagePanelComponent;
-  // @ViewChild(DeleteMessageDialogComponent) deleteMessageDialog: DeleteMessageDialogComponent;
-  // @ViewChild(EditMessagePanelComponent) editMessagePanel: EditMessagePanelComponent;
-  //
-  //
-  //Note action
+  @ViewChild(DeleteMessageDialogComponent) deleteMessageDialog: DeleteMessageDialogComponent;
+  @ViewChild(EditMessagePanelComponent) editMessagePanel: EditMessagePanelComponent;
+
+
+  //Note actions
   @ViewChild(AddNotePanelComponent) addNotePanel: AddNotePanelComponent;
   @ViewChild(EditNoteDialogComponent) editNoteDialog: EditNoteDialogComponent;
   @ViewChild(DeleteNoteDialogComponent) deleteNoteDialog: DeleteNoteDialogComponent;
 
   //USer action
-  // @ViewChild(ViewMemberDialogComponent) membersViewDialog: ViewMemberDialogComponent;
-  // @ViewChild(AddMemberDialogComponent) addMemberDialog: AddMemberDialogComponent;
+  @ViewChild(ViewMemberDialogComponent) membersViewDialog: ViewMemberDialogComponent;
+  @ViewChild(AddMemberDialogComponent) addMemberDialog: AddMemberDialogComponent;
 
-  // TODO add create message method
+
   onCreateMessage(): void {
     this.addMessageObjectPanel.openPanel();
   }
 
-  // TODO add create note message
   onAddNote(): void {
     this.addNotePanel.openPanel();
   }
@@ -88,6 +91,16 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
 
   onClickDeleteElement(): void {
     this.deleteElementDialog.openDialog();
+  }
+
+  onClickMembersView(): void {
+    this.membersViewDialog.initDialog();
+    this.membersViewDialog.openDialog();
+  }
+
+  onClickAddMember(): void {
+    this.addMemberDialog.initDialog();
+    this.addMemberDialog.openDialog();
   }
 
   ngAfterViewInit(): void {
@@ -140,16 +153,14 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
       this.loading = false;
     });
 
-    //TODO add get Messages
-    // this.elementService.getMessages(this.element.element)
-    //     .then((retMessages) => {
-    //         this.messagesSet = retMessages;
-    //         this.loading = false;
-    //     }).catch((error)=> {
-    //     this.error = error;
-    // });
+    this.messageService.getMessages(this.element.element)
+      .then((retMessages) => {
+        this.messagesSet = retMessages;
+        this.loading = false;
+      }).catch((error) => {
+      this.error = error;
+    });
 
-    //TODO add get Notes
     this.noteService.getNotes(this.element.element)
       .then((retNotes) => {
         this.notesSet = retNotes;
