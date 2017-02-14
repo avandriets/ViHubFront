@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   SetError(error: Response): void {
 
-    if(error.status == 401){
+    if (error.status == 401 || error.status == 403) {
       this.loginService.logout();
       this.router.navigateByUrl('/login');
       return;

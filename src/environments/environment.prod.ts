@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  hostUrl: 'http://ditcom-dev.westeurope.cloudapp.azure.com:8000'
 };
