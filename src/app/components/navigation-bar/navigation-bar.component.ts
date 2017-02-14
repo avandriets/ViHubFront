@@ -18,7 +18,9 @@ export class NavigationBarComponent implements OnInit, AfterViewInit {
   private email: string;
 
 
-  constructor(public router: Router,private winRef: WindowRef) {
+  constructor(public router: Router,
+              private winRef: WindowRef,
+              private loginService: LoginService) {
     this.user = Utils.getCurrentUser();
 
     if (this.user) {
