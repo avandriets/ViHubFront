@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.30",
+    "version": "1.0.0-beta.31",
     "name": "vi-hub-front"
   },
   "apps": [
@@ -19,8 +19,8 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "./css/reset200802.css",
-        "./sass/app.css"
+        "css/reset200802.css",
+        "sass/app.css"
       ],
       "scripts": [],
       "environments": {
