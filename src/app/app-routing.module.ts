@@ -5,6 +5,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {LoginComponent} from "./components/users/login/login.component";
 import {ElementDetailComponent} from "./components/element-detail/element-detail.component";
 import {RegisterUserComponent} from "./components/users/register-user/register-user.component";
+import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 
 const routes: Routes = [
   {
@@ -19,11 +20,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [CanActivateNotSignIn]
   },
   {
     path: 'register',
-    component: RegisterUserComponent
+    component: RegisterUserComponent,
+    canActivate: [CanActivateNotSignIn]
   },
   {
     path: '',

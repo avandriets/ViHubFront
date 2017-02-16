@@ -27,6 +27,7 @@ import { MessagesListComponent } from './components/messages/messages-list/messa
 import { ViewMemberDialogComponent } from './components/members/view-member-dialog/view-member-dialog.component';
 import { AddMemberDialogComponent } from './components/members/add-member-dialog/add-member-dialog.component';
 import { RegisterUserComponent } from './components/users/register-user/register-user.component';
+import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { RegisterUserComponent } from './components/users/register-user/register
     HttpModule,
     routing
   ],
-  providers: [CanActivateViaOAuthGuard],
+  providers: [CanActivateViaOAuthGuard, CanActivateNotSignIn],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
