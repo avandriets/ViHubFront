@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
-import {LoginService} from '../../services/login.service';
-import {Utils, isLoggedin} from "../../classes/utility/utils";
+import {LoginService} from '../../../services/login.service';
+import {Utils, isLoggedin} from "../../../classes/utility/utils";
 
 @Component({
   selector: 'vihub-login',
-  templateUrl: './login.component.html',
+  templateUrl: 'login.component.html',
   providers: [LoginService]
 })
 

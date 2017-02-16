@@ -2,8 +2,9 @@ import {ModuleWithProviders} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {LoginComponent} from "./components/login/login.component";
+import {LoginComponent} from "./components/users/login/login.component";
 import {ElementDetailComponent} from "./components/element-detail/element-detail.component";
+import {RegisterUserComponent} from "./components/users/register-user/register-user.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterUserComponent
   },
   {
     path: '',

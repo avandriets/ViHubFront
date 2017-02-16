@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/users/login/login.component';
 import {CanActivateViaOAuthGuard} from "./classes/can-activate-via-oauth-guard";
 import { routing } from './app-routing.module';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
@@ -26,6 +26,7 @@ import { NotesListComponent } from './components/notes/notes-list/notes-list.com
 import { MessagesListComponent } from './components/messages/messages-list/messages-list.component';
 import { ViewMemberDialogComponent } from './components/members/view-member-dialog/view-member-dialog.component';
 import { AddMemberDialogComponent } from './components/members/add-member-dialog/add-member-dialog.component';
+import { RegisterUserComponent } from './components/users/register-user/register-user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { AddMemberDialogComponent } from './components/members/add-member-dialog
     NotesListComponent,
     MessagesListComponent,
     ViewMemberDialogComponent,
-    AddMemberDialogComponent
+    AddMemberDialogComponent,
+    RegisterUserComponent
   ],
   imports: [
     BrowserModule,
