@@ -28,6 +28,7 @@ import { ViewMemberDialogComponent } from './components/members/view-member-dial
 import { AddMemberDialogComponent } from './components/members/add-member-dialog/add-member-dialog.component';
 import { RegisterUserComponent } from './components/users/register-user/register-user.component';
 import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
+import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
     MessagesListComponent,
     ViewMemberDialogComponent,
     AddMemberDialogComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

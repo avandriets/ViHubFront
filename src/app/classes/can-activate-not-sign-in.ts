@@ -14,7 +14,6 @@ export class CanActivateNotSignIn implements CanActivate {
     }
 
     return (localStorage.getItem("token") == null);
-    //return false;
   }
 
 }

@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
   }
 
   SetError(error: any): void {
-
     if (error != null) {
       this.hasError = true;
 
@@ -73,6 +72,6 @@ export class LoginComponent implements OnInit {
     } else {
       this.hasError = false;
     }
-
   }
+
 }

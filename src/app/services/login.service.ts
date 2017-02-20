@@ -84,4 +84,62 @@ export class LoginService {
     localStorage.removeItem('user');
   }
 
+  register(email_address, first_name, last_name, password1, password2): Observable<any> {
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': '*/*',
+      }
+    );
+
+    //headers.append('Authorization', 'Basic ' + btoa(this.key1 + ':' + this.key2));
+
+    let options = new RequestOptions({headers: headers});
+
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('email', email_address);
+    params.set('first_name', first_name);
+    params.set('last_name', last_name);
+    params.set('password1', password1);
+    params.set('password2', password2);
+
+    return this.http.post(
+      Utils.UserURL,
+      params,
+      options
+    ).map(this.handleRegisterAction)
+      .catch(this.handleError);
+  }
+
+  private handleRegisterAction(res: Response) {
+    let body = res.json();
+    return body;
+  }
+
+  save_profile(username, first_name, last_name, current_user) {
+
+    let token = localStorage.getItem('token');
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + token,
+      }
+    );
+
+    let options = new RequestOptions({headers: headers});
+
+    let userData = {'username':username, 'first_name':first_name, 'last_name':last_name };
+
+    let url = `${Utils.UserURL}${current_user.id}/`;
+
+    return this.http.put(
+      url,
+      userData,
+      options
+    ).map(this.handleRegisterAction)
+      .catch(this.handleError);
+  }
 }

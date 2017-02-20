@@ -1,0 +1,56 @@
+<header>
+  <app-navigation-bar></app-navigation-bar>
+</header>
+
+<main>
+  <div class="ms-Grid">
+    <div class="ms-Grid-row">
+      <div class="ms-Grid-col ms-u-sm12 ms-u-mdOffset1 ms-u-md10 ms-u-lgOffset3 ms-u-lg6">
+        <h1 class="ms-font-xxl">Изменение профиля</h1>
+
+        <div *ngIf="hasError">
+          <br>
+          <div class="ms-MessageBar ms-MessageBar--error">
+            <div class="ms-MessageBar-content">
+              <div class="ms-MessageBar-icon">
+                <i class="ms-Icon ms-Icon--xCircle"></i>
+              </div>
+              <div class="ms-MessageBar-text">
+                {{ errorMessage }}
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
+        <form action="" method="post" (submit)="save_profile($event, username.value, first_name.value, last_name.value)">
+
+          <div class="ms-TextField is-disabled">
+            <label class="ms-Label"><span>Email</span></label>
+            <input class="ms-TextField-field" type="email" placeholder="Адрес электронной почты" value="{{ currentUser.email }}">
+          </div>
+
+          <div class="ms-TextField is-required">
+            <label class="ms-Label"><span>Отображаемое имя пользователя</span></label>
+            <input class="ms-TextField-field" #username placeholder="Имя пользователя" value="{{ currentUser.username }}">
+          </div>
+
+          <div class="ms-TextField is-required">
+            <label class="ms-Label">Имя</label>
+            <input class="ms-TextField-field" #first_name placeholder="Имя" value="{{ currentUser.first_name }}">
+          </div>
+
+          <div class="ms-TextField is-required">
+            <label class="ms-Label">Фамилия</label>
+            <input class="ms-TextField-field" #last_name placeholder="Фамилия" value="{{ currentUser.last_name }}">
+          </div>
+
+          <p>
+            <button type="submit" class="ms-Button ms-Button--primary"><span class="ms-Button-label">Сохранить</span></button>
+          </p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</main>

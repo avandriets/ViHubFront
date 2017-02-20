@@ -1,3 +1,65 @@
-<p>
-  register-user works!
-</p>
+<div class="ms-Grid">
+  <div class="ms-Grid-row">
+    <div class="ms-Grid-col ms-u-sm12 ms-u-mdOffset1 ms-u-md10 ms-u-lgOffset3 ms-u-lg6">
+
+      <form method="post"
+            class="u-contentCenter"
+            (submit)="register($event, email_address.value, first_name.value, last_name.value, password1.value, password2.value)"
+      >
+        <h1 class="ms-font-xl">Введите ваши учетные данные для регистрации</h1>
+
+        <div *ngIf="hasError">
+          <br>
+          <div class="ms-MessageBar ms-MessageBar--error">
+            <div class="ms-MessageBar-content">
+              <div class="ms-MessageBar-icon">
+                <i class="ms-Icon ms-Icon--xCircle"></i>
+              </div>
+              <div class="ms-MessageBar-text">
+                {{ errorMessage }}
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
+
+        <div class="ms-TextField is-required">
+          <label class="ms-Label"><span>E-mail адресс</span></label>
+          <input class="ms-TextField-field" #email_address type="email" placeholder="Адрес электронной почты">
+        </div>
+
+        <div class="ms-TextField is-required">
+          <label class="ms-Label">Имя</label>
+          <input class="ms-TextField-field" #first_name placeholder="Имя">
+        </div>
+
+
+        <div class="ms-TextField is-required">
+          <label class="ms-Label">Фамилия</label>
+          <input class="ms-TextField-field" #last_name placeholder="Фамилия">
+        </div>
+
+        <div class="ms-TextField is-required">
+          <label class="ms-Label">Пароль</label>
+          <input class="ms-TextField-field" #password1 type="password" placeholder="Пароль">
+        </div>
+
+        <div class="ms-TextField is-required">
+          <label class="ms-Label">Подтверждение</label>
+          <input class="ms-TextField-field" #password2 type="password" placeholder="Подтверждение">
+        </div>
+
+        <p>
+          <button type="submit" class="ms-Button ms-Button--primary"><span class="ms-Button-label">Сохранить</span></button>
+        </p>
+        <div>
+          <br>
+          <a class="ms-Link" href="login">Вход на сайт</a>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</div>
