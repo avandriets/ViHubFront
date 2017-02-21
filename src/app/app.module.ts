@@ -29,6 +29,7 @@ import { AddMemberDialogComponent } from './components/members/add-member-dialog
 import { RegisterUserComponent } from './components/users/register-user/register-user.component';
 import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
+import { ChangePasswordComponent } from './components/users/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { EditProfileComponent } from './components/users/edit-profile/edit-profi
     ViewMemberDialogComponent,
     AddMemberDialogComponent,
     RegisterUserComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

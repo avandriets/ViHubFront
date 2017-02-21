@@ -7,6 +7,7 @@ import {ElementDetailComponent} from "./components/element-detail/element-detail
 import {RegisterUserComponent} from "./components/users/register-user/register-user.component";
 import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 import {EditProfileComponent} from "./components/users/edit-profile/edit-profile.component";
+import {ChangePasswordComponent} from "./components/users/change-password/change-password.component";
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
   {
     path: 'edit-profile',
     component: EditProfileComponent,
+    canActivate: [CanActivateViaOAuthGuard]
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
     canActivate: [CanActivateViaOAuthGuard]
   },
   {

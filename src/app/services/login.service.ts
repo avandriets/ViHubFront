@@ -93,8 +93,6 @@ export class LoginService {
       }
     );
 
-    //headers.append('Authorization', 'Basic ' + btoa(this.key1 + ':' + this.key2));
-
     let options = new RequestOptions({headers: headers});
 
     let params: URLSearchParams = new URLSearchParams();
@@ -117,7 +115,7 @@ export class LoginService {
     return body;
   }
 
-  save_profile(username, first_name, last_name, current_user) {
+  save_profile(username, first_name, last_name, current_user): Observable<any> {
 
     let token = localStorage.getItem('token');
 
@@ -131,11 +129,36 @@ export class LoginService {
 
     let options = new RequestOptions({headers: headers});
 
-    let userData = {'username':username, 'first_name':first_name, 'last_name':last_name };
+    let userData = {'username': username, 'first_name': first_name, 'last_name': last_name};
 
     let url = `${Utils.UserURL}${current_user.id}/`;
 
     return this.http.put(
+      url,
+      userData,
+      options
+    ).map(this.handleRegisterAction)
+      .catch(this.handleError);
+  }
+
+  change_password(password1: any, password2: any, currentUser: UserVi): Observable<any> {
+    let token = localStorage.getItem('token');
+
+    let headers = new Headers(
+      {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + token,
+      }
+    );
+
+    let options = new RequestOptions({headers: headers});
+
+    let userData = {'password1': password1, 'password2': password2};
+
+    let url = `${Utils.UserURL}${currentUser.id}/change-password/`;
+
+    return this.http.post(
       url,
       userData,
       options

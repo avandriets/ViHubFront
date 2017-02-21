@@ -23,6 +23,21 @@
           <br>
         </div>
 
+        <div *ngIf="showInfo">
+          <br>
+          <div class="ms-MessageBar ms-MessageBar--info">
+            <div class="ms-MessageBar-content">
+              <div class="ms-MessageBar-icon">
+                <i class="ms-Icon ms-Icon--xCircle"></i>
+              </div>
+              <div class="ms-MessageBar-text">
+                {{ infoMessage }}
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+
         <form action="" method="post" (submit)="save_profile($event, username.value, first_name.value, last_name.value)">
 
           <div class="ms-TextField is-disabled">
@@ -49,6 +64,10 @@
             <button type="submit" class="ms-Button ms-Button--primary"><span class="ms-Button-label">Сохранить</span></button>
           </p>
         </form>
+        <div>
+          <br>
+          <a class="ms-Link" href="change-password">Изменить пароль</a>
+        </div>
 
       </div>
     </div>
