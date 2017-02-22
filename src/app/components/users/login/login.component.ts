@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     this.siteName = Utils.siteName;
   }
 
+  //TODO add waiting screen that shows login process
   login(event, username, password) {
     event.preventDefault();
 
