@@ -37,6 +37,9 @@
 
     <div *ngIf="!loading">
 
+      <input #fileInput type="file"/>
+      <button (click)="addFile()">Add</button>
+
       <div class="page-heading-xxl th-active-bar">
         <div class="m-b-1 ms-Grid-row">
           <div class="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg8 ms-u-xl8">

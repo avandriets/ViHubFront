@@ -21,11 +21,17 @@ import {MessagesService} from "../../services/messages.service";
 import {AddMemberDialogComponent} from "../members/add-member-dialog/add-member-dialog.component";
 import {ViewMemberDialogComponent} from "../members/view-member-dialog/view-member-dialog.component";
 import {MembersService} from "../../services/members.service";
+import {FilesService} from "../../services/files.service";
+import {Attachment} from "../../classes/base-objects/attachment";
 
 @Component({
   selector: 'element-detail',
   templateUrl: './element-detail.component.html',
-  providers: [LoginService, WindowRef, ElementsService, NotesService, MessagesService, MembersService]
+  providers: [
+    LoginService, WindowRef, ElementsService,
+    NotesService, MessagesService,
+    MembersService, FilesService
+  ]
 })
 
 export class ElementDetailComponent implements OnInit, AfterViewInit {
@@ -48,7 +54,8 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
               private route: ActivatedRoute,
               private winRef: WindowRef,
               private noteService: NotesService,
-              private messageService: MessagesService) {
+              private messageService: MessagesService,
+              private fileService: FilesService) {
   }
 
 
@@ -172,6 +179,25 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
 
   dataChange(changerData: TransportObject): void {
     this.getData();
+  }
+
+  @ViewChild("fileInput") fileInput;
+
+  addFile(): void {
+    let fi = this.fileInput.nativeElement;
+    if (fi.files && fi.files[0]) {
+      let fileToUpload = fi.files[0];
+
+      let attach = new Attachment();
+      attach.element = this.element.element;
+      attach.description = "Hello from file";
+
+      this.fileService.uploadAttachment(attach, fileToUpload)
+        .subscribe(
+          data => console.log('success'),
+          error => console.log(error)
+        );
+    }
   }
 
 }

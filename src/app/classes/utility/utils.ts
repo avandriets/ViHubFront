@@ -12,6 +12,7 @@ export class Utils {
   public static noteUrl: string = environment.hostUrl + '/rest/notes/';
   public static messageUrl: string = environment.hostUrl + '/rest/messages/';
   public static searchUrl: string = environment.hostUrl + '/vi-hub/search-user/';
+  public static attachmentUrl: string = environment.hostUrl + '/rest/attachments/';
 
   //Users urls
   public static OauthLoginEndPointUrl = environment.hostUrl + '/o/token/';
