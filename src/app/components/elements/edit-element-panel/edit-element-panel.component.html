@@ -29,7 +29,7 @@
 
             <div [ngClass]="{'ms-TextField':true, 'ms-TextField--multiline':true, 'is-required':false, 'is-disabled': inProcess || permission_denied}">
                 <label class="ms-Label">Описание</label>
-                <textarea [(ngModel)]="description" class="ms-TextField-field" type="text" maxlength="300"></textarea>
+                <textarea [(ngModel)]="description" class="ms-TextField-field" type="text" maxlength="5000"></textarea>
             </div>
         </div>
 

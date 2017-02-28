@@ -1,0 +1,26 @@
+<delete-item (onDialogActionEvent)="onActionDeleteDialog($event)"></delete-item>
+
+<h2 *ngIf="itemsList.length == 0" class="ms-font-xl">Нет загруженных файлов</h2>
+
+<div class="m-b-2 th-active-bar" *ngFor="let item of itemsList" tabindex="0">
+    <div class="ms-Persona">
+        <div class="ms-Persona-imageArea">
+            <div class="ms-Persona-initials ms-Persona-initials--primary">RM</div>
+            <!--<img class="ms-Persona-image" src="../persona/Persona.Person2.png">-->
+        </div>
+        <div class="ms-Persona-details">
+
+            <div class="m-b-1">
+                <span class="ms-fontWeight-semibold">{{ item.first_name }} {{ item.last_name }}</span>
+                {{ item.created_at|date:'dd.MM.yyyy hh:mm' }}
+            </div>
+            <div class="ms-fontSize-l m-b-1"> {{ item.description }}</div>
+        </div>
+    </div>
+    <div class="th-hover-active-bar">
+        <div (click)="onOpenDeleteItemDialog(message)" class="th-Card-action"><i
+                class="ms-Icon ms-Icon--Delete "></i> Удалить
+        </div>
+    </div>
+</div>
+

@@ -1,5 +1,5 @@
 import {UserVi} from "../base-objects/user-vi";
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 export class Utils {
 
@@ -19,12 +19,12 @@ export class Utils {
   public static UserURL: string = environment.hostUrl + "/rest/users/";
   public static meUserURL: string = environment.hostUrl + '/vi-hub/me';
 
-  static getCurrentUser(): UserVi{
+  static getCurrentUser(): UserVi {
     let currUser: UserVi = JSON.parse(localStorage.getItem('user')) as UserVi;
     return currUser;
   }
-}
 
-export function isLoggedin() {
-  return !!localStorage.getItem('token');
+  static getToken(): string {
+    return localStorage.getItem('token');
+  }
 }

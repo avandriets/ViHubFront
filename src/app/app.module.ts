@@ -30,6 +30,9 @@ import { RegisterUserComponent } from './components/users/register-user/register
 import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
 import { ChangePasswordComponent } from './components/users/change-password/change-password.component';
+import { FilesListComponent } from './components/files/files-list/files-list.component';
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
+import { AddFilePanelComponent } from './components/files/add-file-panel/add-file-panel.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { ChangePasswordComponent } from './components/users/change-password/chan
     AddMemberDialogComponent,
     RegisterUserComponent,
     EditProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FilesListComponent,
+    DeleteItemComponent,
+    AddFilePanelComponent
   ],
   imports: [
     BrowserModule,

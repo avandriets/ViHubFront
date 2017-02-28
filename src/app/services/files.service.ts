@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams} from "@angular/http";
 import {Attachment} from "../classes/base-objects/attachment";
 import {Utils} from "../classes/utility/utils";
 import {Observable} from "rxjs";
+import {ElementVi} from "../classes/base-objects/element-vi";
 
 @Injectable()
 export class FilesService {
@@ -10,6 +11,15 @@ export class FilesService {
   headers: Headers;
 
   constructor(private http: Http) {
+
+    this.headers = new Headers(
+      {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer ' + Utils.getToken(),
+      }
+    );
+
   }
 
   private handleError(error: any): Promise<any> {
@@ -19,8 +29,6 @@ export class FilesService {
 
   uploadAttachment(newFile: Attachment, fileToUpload: any): Observable<any> {
 
-    let token = localStorage.getItem('token');
-
     let input = new FormData();
     input.append("fileURL", fileToUpload);
     input.append("element", newFile.element);
@@ -28,7 +36,7 @@ export class FilesService {
 
     let head = new Headers();
     head.append('Accept', 'application/json');
-    head.append('Authorization', 'Bearer ' + token);
+    head.append('Authorization', 'Bearer ' + Utils.getToken());
 
     let options = new RequestOptions({headers: head});
     return this.http.post(Utils.attachmentUrl, input, options)
@@ -36,4 +44,14 @@ export class FilesService {
       .catch(error => Observable.throw(error));
   }
 
+  getFilesList(element: ElementVi): Observable<Attachment[]> {
+    let params = new URLSearchParams();
+    params.set('element', element.element.toString());
+
+    let options = new RequestOptions({headers: this.headers, search: params});
+
+    return this.http.get(Utils.attachmentUrl,options)
+      .map(result => result.json() as Attachment[])
+      .catch(error => Observable.throw(error));
+  }
 }

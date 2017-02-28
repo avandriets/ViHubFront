@@ -23,6 +23,9 @@ import {ViewMemberDialogComponent} from "../members/view-member-dialog/view-memb
 import {MembersService} from "../../services/members.service";
 import {FilesService} from "../../services/files.service";
 import {Attachment} from "../../classes/base-objects/attachment";
+import {AddFilePanelComponent} from "../files/add-file-panel/add-file-panel.component";
+import {AddFileAction} from "../../classes/base-objects/interfaces";
+
 
 @Component({
   selector: 'element-detail',
@@ -34,7 +37,7 @@ import {Attachment} from "../../classes/base-objects/attachment";
   ]
 })
 
-export class ElementDetailComponent implements OnInit, AfterViewInit {
+export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAction {
 
   hasError: boolean = false;
   errorMessage: string = "";
@@ -43,8 +46,11 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
   element: ElementVi;
 
   elementsSet: ElementVi[] = [];
+
   messagesSet: MessageVi[] = [];
   notesSet: NoteVi[] = [];
+  attachmentSet: Array<Attachment> = [];
+
   breadcrumbs: ElementVi[] = [];
 
   loading: boolean = true;
@@ -58,6 +64,8 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
               private fileService: FilesService) {
   }
 
+  //Files action
+  @ViewChild(AddFilePanelComponent) addFilePanel: AddFilePanelComponent;
 
   //Element actions
   @ViewChild(DeleteElementDialogComponent) deleteElementDialog: DeleteElementDialogComponent;
@@ -92,6 +100,26 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
     this.addPanelObject.openPanel();
   }
 
+  onActionAddFile(fileName: string): void {
+    console.log("onActionAddFile:" + fileName);
+
+    // let fi = this.fileInput.nativeElement;
+    // if (fi.files && fi.files[0]) {
+    //   let fileToUpload = fi.files[0];
+    //
+    //   let attach = new Attachment();
+    //   attach.element = this.element.element;
+    //   attach.description = "Hello from file";
+    //
+    //   this.fileService.uploadAttachment(attach, fileToUpload)
+    //     .subscribe(
+    //       data => console.log('success'),
+    //       error => console.log(error)
+    //     );
+    // }
+
+  }
+
   openEditElementPanel(): void {
     this.editPanelObject.openPanel();
   }
@@ -108,6 +136,10 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
   onClickAddMember(): void {
     this.addMemberDialog.initDialog();
     this.addMemberDialog.openDialog();
+  }
+
+  onAddAttachment(): void {
+    this.addFilePanel.openPanel();
   }
 
   ngAfterViewInit(): void {
@@ -175,29 +207,19 @@ export class ElementDetailComponent implements OnInit, AfterViewInit {
       }).catch((error) => {
       this.error = error;
     });
+
+    this.fileService.getFilesList(this.element).subscribe(
+      response => {
+        this.attachmentSet = response;
+      },
+      error => {
+        this.error = error;
+        this.loading = false;
+      }
+    );
   }
 
   dataChange(changerData: TransportObject): void {
     this.getData();
   }
-
-  @ViewChild("fileInput") fileInput;
-
-  addFile(): void {
-    let fi = this.fileInput.nativeElement;
-    if (fi.files && fi.files[0]) {
-      let fileToUpload = fi.files[0];
-
-      let attach = new Attachment();
-      attach.element = this.element.element;
-      attach.description = "Hello from file";
-
-      this.fileService.uploadAttachment(attach, fileToUpload)
-        .subscribe(
-          data => console.log('success'),
-          error => console.log(error)
-        );
-    }
-  }
-
 }

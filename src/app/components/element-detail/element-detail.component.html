@@ -14,6 +14,8 @@
 <delete-message-dialog (onDeleteMessage)="dataChange($event)"></delete-message-dialog>
 <edit-message-panel (onSaveNote)="dataChange($event)"></edit-message-panel>
 
+<add-file-panel (AddFileEventEmitter)="onActionAddFile($event)"></add-file-panel>
+
 <header>
   <app-navigation-bar></app-navigation-bar>
 </header>
@@ -36,9 +38,6 @@
     </div>
 
     <div *ngIf="!loading">
-
-      <input #fileInput type="file"/>
-      <button (click)="addFile()">Add</button>
 
       <div class="page-heading-xxl th-active-bar">
         <div class="m-b-1 ms-Grid-row">
@@ -75,7 +74,7 @@
         <div class="ms-fontSize-l">{{ element.description }}</div>
       </div>
 
-
+      <!--СООБЩЕНИЯ-->
       <div class="ms-Grid-row">
         <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg4 ms-u-xl4">
           <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">145</span> (200)</p>
@@ -108,6 +107,8 @@
 
           <h2 *ngIf="messagesSet.length == 0" class="ms-font-xl">Нет сообщений для отображения</h2>
         </div>
+
+        <!--ЗАМЕТКИ-->
         <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl4">
           <p class="m-b-05 ms-u-textAlignRight"><span
             class="color-primary">145</span> (200)</p>
@@ -138,6 +139,35 @@
           </notes-list>
 
           <h2 *ngIf="notesSet.length == 0" class="ms-font-xl">Нет заметок для отображения</h2>
+        </div>
+
+        <!--ФАЙЛЫ-->
+        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl4">
+          <p class="m-b-05 ms-u-textAlignRight"><span
+            class="color-primary">145</span> (200)</p>
+          <div class="page-heading">
+            <div class="ms-PanelExample th-CommandButton">
+              <button (click)="onAddAttachment()"
+                      class="ms-Button th-Button-Icon">
+                <i class="ms-Icon ms-Icon--AddTo"></i>
+              </button>
+              <div class="ms-Panel ms-Panel--md">
+                <button class="ms-Panel-closeButton ms-PanelAction-close">
+                  <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
+                </button>
+                <div class="ms-Panel-contentInner">
+                  <p class="ms-Panel-headerText">Medium Panel</p>
+                  <div class="ms-Panel-content">
+                    <span class="ms-font-m">Content goes here</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h4>Файлы</h4>
+          </div>
+
+          <files-list [itemsList]="attachmentSet"></files-list>
+
         </div>
 
         <div class="ms-u-clearfix"></div>
