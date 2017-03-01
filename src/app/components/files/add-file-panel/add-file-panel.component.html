@@ -5,7 +5,7 @@
   <spinner-component *ngIf="inProcess" [SupportText]="spinnerText"></spinner-component>
   <br>
   <div class="ms-Panel-contentInner">
-    <p class="ms-Panel-headerText">Новое сообщение</p>
+    <p class="ms-Panel-headerText">Загрузить файл</p>
     <div class="ms-Panel-content">
 
       <div *ngIf="hasError">
@@ -22,7 +22,7 @@
         <br>
       </div>
 
-      <input #fileInput type="file"/>
+      <input #fileInput id="uploadBtn" type="file" [ngClass]="{'ms-TextField-field':true, 'is-required':false, 'disabled': inProcess}"/>
 
       <div [ngClass]="{'ms-TextField':true, 'ms-TextField--multiline':true, 'is-required':false, 'is-disabled': inProcess}">
         <label class="ms-Label">Описание</label>

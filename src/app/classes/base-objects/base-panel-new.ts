@@ -24,4 +24,9 @@ export class BasePanelNew extends FormViHub implements OnInit {
   buildPanel(): void {
     this.panelInstance = new this.winRef.nativeWindow.fabric['Panel'](this.panelTemplate);
   }
+
+  closePanel() :void{
+    this.inProcess = false;
+    this.panelInstance.dismiss();
+  }
 }

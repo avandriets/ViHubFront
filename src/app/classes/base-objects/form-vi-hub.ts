@@ -1,6 +1,7 @@
 
 export abstract class FormViHub {
 
+  inProcess = false;
   hasError: boolean = false;
   errorMessage: string = '';
 

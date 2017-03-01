@@ -100,26 +100,6 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
     this.addPanelObject.openPanel();
   }
 
-  onActionAddFile(fileName: string): void {
-    console.log("onActionAddFile:" + fileName);
-
-    // let fi = this.fileInput.nativeElement;
-    // if (fi.files && fi.files[0]) {
-    //   let fileToUpload = fi.files[0];
-    //
-    //   let attach = new Attachment();
-    //   attach.element = this.element.element;
-    //   attach.description = "Hello from file";
-    //
-    //   this.fileService.uploadAttachment(attach, fileToUpload)
-    //     .subscribe(
-    //       data => console.log('success'),
-    //       error => console.log(error)
-    //     );
-    // }
-
-  }
-
   openEditElementPanel(): void {
     this.editPanelObject.openPanel();
   }
@@ -140,6 +120,32 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
 
   onAddAttachment(): void {
     this.addFilePanel.openPanel();
+  }
+
+  onActionAddFile(data: any): void {
+    //console.log("onActionAddFile:" + fileName);
+
+    this.addFilePanel.inProcess = true;
+
+    let attach = new Attachment();
+    attach.element = this.element.element;
+    attach.description = data.description;
+
+    this.fileService.uploadAttachment(attach, data.file)
+      .subscribe(
+        data => {
+          console.log('success');
+          this.addFilePanel.inProcess = false;
+          //Close panel
+          this.addFilePanel.closePanel();
+          this.getFiles();
+        },
+        error => {
+          this.addFilePanel.inProcess = false;
+          console.log(error);
+        }
+      );
+
   }
 
   ngAfterViewInit(): void {
@@ -208,6 +214,12 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
       this.error = error;
     });
 
+    this.getFiles();
+
+  }
+
+  getFiles(): void {
+
     this.fileService.getFilesList(this.element).subscribe(
       response => {
         this.attachmentSet = response;
@@ -217,6 +229,7 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
         this.loading = false;
       }
     );
+
   }
 
   dataChange(changerData: TransportObject): void {

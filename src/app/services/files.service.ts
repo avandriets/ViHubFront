@@ -50,8 +50,21 @@ export class FilesService {
 
     let options = new RequestOptions({headers: this.headers, search: params});
 
-    return this.http.get(Utils.attachmentUrl,options)
+    return this.http.get(Utils.attachmentUrl, options)
       .map(result => result.json() as Attachment[])
       .catch(error => Observable.throw(error));
+  }
+
+  deleteAttachments(fileAttachment: Attachment): Observable<Attachment> {
+    const url = `${Utils.attachmentUrl}${fileAttachment.id}/`;
+
+    return this.http.delete(url, {headers: this.headers})
+      .map(result => fileAttachment)
+      .catch(error => Observable.throw(error));
+
+      // .delete(url, {headers: this.headers})
+      // .toPromise()
+      // .then(() => deleteNote)
+      // .catch(this.handleError);
   }
 }

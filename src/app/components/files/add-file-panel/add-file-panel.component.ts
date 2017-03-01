@@ -37,14 +37,31 @@ export class AddFilePanelComponent extends BasePanelNew implements OnInit, AddPa
     //     );
     // }
 
+
     let fileToUpload;
     let fi = this.fileInput.nativeElement;
 
     if (fi.files && fi.files[0]) {
       fileToUpload = fi.files[0];
-      this.AddFileEventEmitter.emit(fileToUpload);
+      let data = {file: fileToUpload, description: this.description};
+      this.AddFileEventEmitter.emit(data);
+    } else {
+      this.SetError({detail: "Выберети файл"});
     }
     console.log(fileToUpload);
   }
 
+  SetError(error: any): void {
+    if (error != null) {
+      this.hasError = true;
+      if (error.detail) {
+        this.errorMessage = error.detail;
+      } else {
+        this.errorMessage = "Ошибка";
+      }
+
+    } else {
+      this.hasError = false;
+    }
+  }
 }
