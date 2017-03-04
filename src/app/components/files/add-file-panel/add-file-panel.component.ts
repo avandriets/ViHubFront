@@ -1,12 +1,13 @@
+///<reference path="../../file-uploader/file-uploader.component.ts"/>
 import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import {WindowRef} from "../../../services/window-ref.service";
 import {BasePanelNew} from "../../../classes/base-objects/base-panel-new";
 import {AddPanelItem} from "../../../classes/base-objects/interfaces";
 
-
 @Component({
   selector: 'add-file-panel',
-  templateUrl: './add-file-panel.component.html'
+  templateUrl: './add-file-panel.component.html',
+  styleUrls: ['./add-file-panel.component.scss']
 })
 export class AddFilePanelComponent extends BasePanelNew implements OnInit, AddPanelItem {
 

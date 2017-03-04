@@ -33,6 +33,7 @@ import { ChangePasswordComponent } from './components/users/change-password/chan
 import { FilesListComponent } from './components/files/files-list/files-list.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { AddFilePanelComponent } from './components/files/add-file-panel/add-file-panel.component';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AddFilePanelComponent } from './components/files/add-file-panel/add-fil
     ChangePasswordComponent,
     FilesListComponent,
     DeleteItemComponent,
-    AddFilePanelComponent
+    AddFilePanelComponent,
+    FileUploaderComponent
   ],
   imports: [
     BrowserModule,

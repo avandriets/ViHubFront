@@ -22,7 +22,13 @@
         <br>
       </div>
 
-      <input #fileInput id="uploadBtn" type="file" [ngClass]="{'ms-TextField-field':true, 'is-required':false, 'disabled': inProcess}"/>
+      <!--<input #fileInput id="uploadBtn" type="file" [ngClass]="{'ms-TextField-field':true, 'is-required':false, 'disabled': inProcess}"/>-->
+      <div [ngClass]="{'ms-TextField':true}">
+        <label class="ms-Label">Выберите файл</label>
+        <form>
+            <file-uploader [activeColor]="'orangered'" [baseColor]="'lightgray'"></file-uploader>
+        </form>
+      </div>
 
       <div [ngClass]="{'ms-TextField':true, 'ms-TextField--multiline':true, 'is-required':false, 'is-disabled': inProcess}">
         <label class="ms-Label">Описание</label>

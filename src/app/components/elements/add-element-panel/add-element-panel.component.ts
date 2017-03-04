@@ -8,7 +8,8 @@ import {BaseObject} from "../../../classes/base-objects/base-object";
 
 @Component({
   selector: 'add-element-panel',
-  templateUrl: 'add-element-panel.component.html'
+  templateUrl: 'add-element-panel.component.html',
+  styleUrls: ['add-element-panel.component.scss']
 })
 
 
