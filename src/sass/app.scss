@@ -1,6 +1,6 @@
 @import '../../node_modules/office-ui-fabric-core/src/sass/Fabric';
 
-// variable
+// variables
 
 $text-color-primary:  unquote("rgba(0, 0, 0, 0.87)") !default;//green; //
 $text-color-secondary: unquote("rgba(0, 0, 0, 0.54)") !default;
@@ -471,7 +471,16 @@ header{
 // MessageBar';
 // OrgChart';
 // Overlay';
+.ms-Overlay{
+  z-index: 9;
+}
 // Panel';
+.ms-Panel{
+  overflow-y: auto;
+}
+.ms-Panel-contentInner{
+  height: auto;
+}
 // PanelHost';
 // PeoplePicker';
 // Persona';
@@ -488,6 +497,9 @@ header{
 // Spinner';
 // Table';
 // TextField';
+.ms-TextField.ms-TextField--multiline .ms-TextField-field{
+    max-width: 100%;
+}
 
 .ms-TextField-Button-icon{
   .ms-TextField-field{
@@ -536,7 +548,10 @@ header{
   }
 }
 .th-Card-action{
-  opacity: 0;
+  opacity: 1;
+   @media (min-width: $ms-screen-min-xl) {
+     opacity: 0;
+   }
   display: inline-block;
   cursor: pointer;
   font-size: $ms-font-size-m;

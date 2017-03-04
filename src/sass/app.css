@@ -6075,11 +6075,23 @@ header {
   .ms-List:hover .ms-Link, .ms-ListItem:hover .ms-Link {
     opacity: 1; }
 
+.ms-Overlay {
+  z-index: 9; }
+
+.ms-Panel {
+  overflow-y: auto; }
+
+.ms-Panel-contentInner {
+  height: auto; }
+
 .ms-Persona {
   font-weight: 100; }
 
 .ms-Persona-initials--primary {
   background-color: #e81123; }
+
+.ms-TextField.ms-TextField--multiline .ms-TextField-field {
+  max-width: 100%; }
 
 .ms-TextField-Button-icon .ms-TextField-field {
   width: calc( 100% - 40px);
@@ -6113,7 +6125,7 @@ header {
     opacity: 1; }
 
 .th-Card-action {
-  opacity: 0;
+  opacity: 1;
   display: inline-block;
   cursor: pointer;
   font-size: 14px;
@@ -6124,6 +6136,9 @@ header {
   color: #e81123;
   outline: transparent;
   position: relative; }
+  @media (min-width: 1024px) {
+    .th-Card-action {
+      opacity: 0; } }
   .th-Card-action .ms-Icon {
     margin-right: 10px;
     top: 2px;

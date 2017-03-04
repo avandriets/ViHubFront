@@ -10,7 +10,8 @@ import {MessageVi} from "../../../classes/base-objects/message-vi";
 
 @Component({
   selector: 'add-message-panel',
-  templateUrl: './add-message-panel.component.html'
+  templateUrl: './add-message-panel.component.html',
+  styleUrls: ['add-message-panel.component.scss']
 })
 
 export class AddMessagePanelComponent extends BasePanel {

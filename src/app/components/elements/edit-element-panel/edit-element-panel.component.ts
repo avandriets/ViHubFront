@@ -8,7 +8,8 @@ import {BaseObject} from "../../../classes/base-objects/base-object";
 
 @Component({
   selector: 'edit-element-panel',
-  templateUrl: './edit-element-panel.component.html'
+  templateUrl: './edit-element-panel.component.html',
+  styleUrls: ['edit-element-panel.component.scss']
 })
 
 export class EditElementPanelComponent extends BasePanel {

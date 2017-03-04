@@ -11,7 +11,9 @@ import {NotesService} from "../../../services/notes.service";
 
 @Component({
   selector: 'add-note-panel',
-  templateUrl: './add-note-panel.component.html'
+  templateUrl: './add-note-panel.component.html',
+    styleUrls: ['add-note-panel.component.scss']
+
 })
 
 export class AddNotePanelComponent extends BasePanel implements AfterViewInit {

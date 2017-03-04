@@ -9,7 +9,8 @@ import {BaseObject} from "../../../classes/base-objects/base-object";
 
 @Component({
   selector: 'edit-message-panel',
-  templateUrl: './edit-message-panel.component.html'
+  templateUrl: './edit-message-panel.component.html',
+  styleUrls: ['edit-message-panel.component.scss']
 })
 
 export class EditMessagePanelComponent extends BasePanel {

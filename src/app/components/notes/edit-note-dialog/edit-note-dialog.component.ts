@@ -9,7 +9,9 @@ import {NotesService} from "../../../services/notes.service";
 
 @Component({
   selector: 'edit-note-dialog',
-  templateUrl: './edit-note-dialog.component.html'
+  templateUrl: './edit-note-dialog.component.html',
+  styleUrls: ['edit-note-dialog.component.scss']
+
 })
 
 export class EditNoteDialogComponent extends BasePanel {
