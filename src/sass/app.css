@@ -6090,6 +6090,17 @@ header {
 .ms-Persona-initials--primary {
   background-color: #e81123; }
 
+.ms-Persona-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 48px;
+  z-index: 10;
+  width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .ms-TextField.ms-TextField--multiline .ms-TextField-field {
   max-width: 100%; }
 
@@ -6127,6 +6138,7 @@ header {
 .th-Card-action {
   opacity: 1;
   display: inline-block;
+  text-decoration: none;
   cursor: pointer;
   font-size: 14px;
   font-weight: 400;

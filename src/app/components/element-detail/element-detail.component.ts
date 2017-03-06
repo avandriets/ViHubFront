@@ -119,6 +119,7 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   }
 
   onAddAttachment(): void {
+    this.addFilePanel.clean();
     this.addFilePanel.openPanel();
   }
 

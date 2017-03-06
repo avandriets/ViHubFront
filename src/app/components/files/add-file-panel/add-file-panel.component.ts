@@ -3,6 +3,7 @@ import {Component, OnInit, Input, Output, EventEmitter, ViewChild} from '@angula
 import {WindowRef} from "../../../services/window-ref.service";
 import {BasePanelNew} from "../../../classes/base-objects/base-panel-new";
 import {AddPanelItem} from "../../../classes/base-objects/interfaces";
+import {FileUploaderComponent} from "../../file-uploader/file-uploader.component";
 
 @Component({
   selector: 'add-file-panel',
@@ -11,7 +12,10 @@ import {AddPanelItem} from "../../../classes/base-objects/interfaces";
 })
 export class AddFilePanelComponent extends BasePanelNew implements OnInit, AddPanelItem {
 
-  @ViewChild("fileInput") fileInput;
+  //@ViewChild("fileInput") fileInput;
+  @ViewChild(FileUploaderComponent) fileUploader: FileUploaderComponent;
+
+
   @Output() AddFileEventEmitter = new EventEmitter<any>();
 
   description: string = '';
@@ -23,27 +27,13 @@ export class AddFilePanelComponent extends BasePanelNew implements OnInit, AddPa
 
   onSaveClick(): void {
 
-    // let fi = this.fileInput.nativeElement;
-    // if (fi.files && fi.files[0]) {
-    //   let fileToUpload = fi.files[0];
-    //
-    //   let attach = new Attachment();
-    //   attach.element = this.element.element;
-    //   attach.description = "Hello from file";
-    //
-    //   this.fileService.uploadAttachment(attach, fileToUpload)
-    //     .subscribe(
-    //       data => console.log('success'),
-    //       error => console.log(error)
-    //     );
-    // }
-
+    console.log(this.fileUploader.uploadedFile);
 
     let fileToUpload;
-    let fi = this.fileInput.nativeElement;
+    //let fi = this.fileInput.nativeElement;
 
-    if (fi.files && fi.files[0]) {
-      fileToUpload = fi.files[0];
+    if (this.fileUploader.uploadedFile) {
+      fileToUpload = this.fileUploader.uploadedFile;
       let data = {file: fileToUpload, description: this.description};
       this.AddFileEventEmitter.emit(data);
     } else {
@@ -64,5 +54,19 @@ export class AddFilePanelComponent extends BasePanelNew implements OnInit, AddPa
     } else {
       this.hasError = false;
     }
+  }
+
+  clean() {
+    this.description = "";
+
+    this.fileUploader.dragging = false;
+    this.fileUploader.loaded = false;
+    this.fileUploader.imageLoaded = false;
+    this.fileUploader.imageSrc = '';
+    this.fileUploader.iconColor = '';
+    this.fileUploader.fileName = '';
+    this.fileUploader.borderColor = '';
+    this.fileUploader.uploadedFile = null;
+    this.hasError = false;
   }
 }

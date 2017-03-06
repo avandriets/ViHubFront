@@ -38,6 +38,17 @@ export class FilesListComponent extends BaseItemsList implements ActionDeleteIte
     this.deleteItemDialog.openDialog();
   }
 
+  isImage(item: Attachment): boolean {
+
+    let arrayE: string[] = item.fileURL.split(".");
+    let extension = arrayE[arrayE.length - 1];
+
+    if (extension == 'jpg' || extension == 'bmp' || extension == 'png' || extension == 'jpeg' || extension == 'gif')
+      return true;
+
+    return false;
+  }
+
   onActionDeleteDialog(action: DialogActions): void {
     if (action == DialogActions.Yes) {
       console.log("onActionDeleteDialog " + action);
