@@ -6,16 +6,8 @@ import {DeleteItemComponent} from "../../delete-item/delete-item.component";
 import {ActionDeleteItem} from "../../../classes/base-objects/interfaces";
 import {DialogActions} from "../../../classes/enums/dialog-actions.enum";
 import {Attachment} from "../../../classes/base-objects/attachment";
-import {FormViHub} from "../../../classes/base-objects/form-vi-hub";
+import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
 
-
-class BaseItemsList extends FormViHub {
-  @Input() protected itemsList: Array<BaseObject> = [];
-
-  constructor() {
-    super();
-  }
-}
 
 @Component({
   selector: 'files-list',
