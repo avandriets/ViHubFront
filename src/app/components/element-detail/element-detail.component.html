@@ -97,13 +97,11 @@
           </div>
 
           <messages-list [addNoteDialogLocal]="addNotePanel"
-                         [localMessages]="messagesSet"
+                         [itemsList]="messagesSet"
                          [deleteMessageDialog]="deleteMessageDialog"
                          [editMessageDialog]="editMessagePanel">
             Загрузка ...
           </messages-list>
-
-          <h2 *ngIf="messagesSet.length == 0" class="ms-font-xl">Нет сообщений для отображения</h2>
         </div>
 
         <!--ЗАМЕТКИ-->
@@ -133,10 +131,9 @@
 
           <notes-list [deleteNoteDialog]="deleteNoteDialog"
                       [editNoteDialog]="editNoteDialog"
-                      [localNotes]="notesSet">Загрузка ...
+                      [itemsList]="notesSet">Загрузка ...
           </notes-list>
 
-          <h2 *ngIf="notesSet.length == 0" class="ms-font-xl">Нет заметок для отображения</h2>
         </div>
 
         <!--ФАЙЛЫ-->
@@ -189,12 +186,12 @@
 
           <div class="ms-Grid-row">
 
-            <elements-list-var [localElements]="elementsSet" (onSetFavorite)="dataChange($event)">
+            <elements-list-var [itemsList]="elementsSet" (onSetFavorite)="dataChange($event)">
               Загрузка ...
             </elements-list-var>
 
           </div>
-          <h2 *ngIf="elementsSet.length == 0" class="ms-font-xl">Нет элементов для отображения</h2>
+
         </div>
       </div>
     </div>

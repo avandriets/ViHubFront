@@ -5,29 +5,24 @@ import {Router} from "@angular/router";
 import {DeleteMessageDialogComponent} from "../delete-message-dialog/delete-message-dialog.component";
 import {EditMessagePanelComponent} from "../edit-message-panel/edit-message-panel.component";
 import {AddNotePanelComponent} from "../../notes/add-note-panel/add-note-panel.component";
+import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
 
 @Component({
   selector: 'messages-list',
   templateUrl: './messages-list.component.html'
 })
 
-export class MessagesListComponent {
+export class MessagesListComponent extends BaseItemsList<MessageVi> {
 
     error: any;
-    @Input() localMessages: MessageVi[] = [];
-    // @Input() viewMessageDialog: ViewMessageDialogComponent;
+
     @Input() addNoteDialogLocal: AddNotePanelComponent;
     @Input() editMessageDialog: EditMessagePanelComponent;
     @Input() deleteMessageDialog: DeleteMessageDialogComponent;
 
     constructor(private elementService: ElementsService, private router: Router) {
+      super();
     }
-
-    // onViewMessageClick(currentMessage: MessageVi): void {
-    //
-    //     this.viewMessageDialog.initDialog(currentMessage);
-    //     this.viewMessageDialog.openDialog();
-    // }
 
     onAddNoteClick(message: MessageVi): void {
         this.addNoteDialogLocal.initDialog(message);

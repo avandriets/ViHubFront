@@ -1,4 +1,6 @@
-<ul *ngFor="let note of localNotes">
+<h2 *ngIf="itemsList.length == 0" class="ms-font-xl">Нет заметок для отображения</h2>
+
+<ul *ngFor="let note of itemsList">
   <li class="th-active-bar m-b-2">
     <div class="m-b-1">
       <span class="ms-fontWeight-semibold">{{ note.first_name }} {{ note.last_name }}</span>

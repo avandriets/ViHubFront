@@ -13,7 +13,7 @@ import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
   selector: 'files-list',
   templateUrl: './files-list.component.html'
 })
-export class FilesListComponent extends BaseItemsList implements ActionDeleteItem {
+export class FilesListComponent extends BaseItemsList<Attachment> implements ActionDeleteItem {
 
   currentFile: Attachment = null;
 
@@ -43,20 +43,16 @@ export class FilesListComponent extends BaseItemsList implements ActionDeleteIte
 
   onActionDeleteDialog(action: DialogActions): void {
     if (action == DialogActions.Yes) {
-      console.log("onActionDeleteDialog " + action);
       if (this.currentFile != null) {
         this.filesService.deleteAttachments(this.currentFile).subscribe(
           data => {
-            console.log('ok');
             this.deleteItemDialog.closeDialog();
-            //this.itemsList.
             let index = this.itemsList.indexOf(this.currentFile, 0);
             if (index > -1) {
               this.itemsList.splice(index, 1);
             }
             this.currentFile = null;
           }, error => {
-            console.log(error);
             this.hasError = true;
             this.SetError(error);
 
@@ -67,7 +63,7 @@ export class FilesListComponent extends BaseItemsList implements ActionDeleteIte
       }
 
     } else {
-      console.log("onActionDeleteDialog " + action);
+      //console.log("onActionDeleteDialog " + action);
     }
   }
 }

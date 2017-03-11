@@ -105,7 +105,7 @@ export class ElementsService {
       .get(Utils.elementsUrl, options)
       .toPromise()
       .then((response) => {
-        return response.json() as ElementVi[];
+        return ElementVi.createFromJsonArray(response.json() as ElementVi[]);
       })
       .catch(this.handleError);
   }
@@ -118,7 +118,7 @@ export class ElementsService {
       .get(Utils.favoriteUrl, options)
       .toPromise()
       .then((response) => {
-        return response.json() as Favorite[];
+        return Favorite.createFromJsonArray(response.json() as Favorite[]);
       })
       .catch(this.handleError);
   }

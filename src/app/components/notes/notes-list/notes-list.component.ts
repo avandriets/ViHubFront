@@ -4,21 +4,21 @@ import {EditNoteDialogComponent} from "../edit-note-dialog/edit-note-dialog.comp
 import {DeleteNoteDialogComponent} from "../delete-note-dialog/delete-note-dialog.component";
 import {ElementsService} from "../../../services/elements.service";
 import {Router} from "@angular/router";
+import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
 
 @Component({
   selector: 'notes-list',
   templateUrl: './notes-list.component.html'
 })
 
-export class NotesListComponent {
+export class NotesListComponent extends BaseItemsList<NoteVi>{
 
     error: any;
-    @Input() localNotes: NoteVi[] = [];
     @Input() editNoteDialog: EditNoteDialogComponent;
     @Input() deleteNoteDialog: DeleteNoteDialogComponent;
-    //@Input() addNoteDialog
 
     constructor(private elementService: ElementsService, private router: Router) {
+      super();
     }
 
     onViewNoteClick(currentNote: NoteVi): void {

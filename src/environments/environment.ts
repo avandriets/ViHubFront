@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  //hostUrl: 'http://127.0.0.1:8000'
-   hostUrl: 'http://ditcom-dev.westeurope.cloudapp.azure.com:8080'
+  hostUrl: 'http://127.0.0.1:8000'
+  // hostUrl: 'http://ditcom-dev.westeurope.cloudapp.azure.com:8080'
 };

@@ -3,23 +3,21 @@ import {ElementVi} from "../../../classes/base-objects/element-vi";
 import {Router} from "@angular/router";
 import {ElementsService} from "../../../services/elements.service";
 import {TransportObject} from "../../../classes/base-objects/transport-object";
+import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
 
 @Component({
   selector: 'elements-list',
   templateUrl: './elements-list.component.html'
 })
 
-export class ElementsListComponent implements OnInit {
+export class ElementsListComponent extends BaseItemsList<ElementVi> {
 
   error: any;
-  @Input() localElements: ElementVi[] = [];
+
   @Output() onSetFavorite = new EventEmitter<TransportObject>();
 
   constructor(private elementService: ElementsService, private router: Router) {
-  }
-
-  ngOnInit(): void {
-    // this.getElements();
+    super();
   }
 
   gotoDetail(element: ElementVi): void {

@@ -1,4 +1,6 @@
-<div class="m-b-2 th-active-bar" *ngFor="let message of localMessages" tabindex="0">
+<h2 *ngIf="itemsList.length == 0" class="ms-font-xl">Нет сообщений для отображения</h2>
+
+<div class="m-b-2 th-active-bar" *ngFor="let message of itemsList" tabindex="0">
     <div class="ms-Persona">
         <div class="ms-Persona-imageArea">
             <div class="ms-Persona-initials ms-Persona-initials--primary">RM</div>

@@ -37,7 +37,8 @@ export class EditNoteDialogComponent extends BasePanel {
   }
 
   initDialog(note: NoteVi, edit: boolean): void {
-    this.currentNote = Object.assign({}, note);
+    //this.currentNote = Object.assign({}, note);
+    this.currentNote = note;
     this.editMode = edit;
   }
 

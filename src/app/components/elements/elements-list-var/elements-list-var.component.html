@@ -1,6 +1,8 @@
+<h2 *ngIf="itemsList.length == 0" class="ms-font-xl ms-Grid-col ms-u-sm12 ms-u-lg4 m-b-1">Нет элементов для отображения</h2>
+
 <div *ngIf="elementService.cardView == true">
 
-    <ul *ngFor="let element of localElements" class="ms-Grid-col ms-u-sm12 ms-u-lg4 m-b-1">
+    <ul *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-lg4 m-b-1">
         <li class="th-active-bar ms-ListItem b-t-1 ms-ListItem--document">
             <div>
                 <span class="ms-fontWeight-semibold">{{ element.first_name }} {{ element.last_name }}</span>
@@ -26,24 +28,3 @@
         </li>
     </ul>
 </div>
-
-<table *ngIf="elementService.cardView == false" class="ms-Table ">
-    <thead>
-    <tr>
-        <th>Название</th>
-        <th>Автор</th>
-        <th>Дата</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr *ngFor="let element of localElements">
-        <td class="ms-Link" (click)="gotoDetail(element)">{{ element.name }}</td>
-        <td>{{ element.first_name }} {{ element.last_name }}</td>
-        <td>{{ element.created_at|date:'hh:mm  dd.MM.yyyy' }}</td>
-        <td><i (click)="changeFavorite(element)"
-               [ngClass]="{'ms-Icon ms-Icon--Flag': true, 'ms-fontColor-yellow': element.is_favorite}"></i></td>
-    </tr>
-    </tbody>
-</table>

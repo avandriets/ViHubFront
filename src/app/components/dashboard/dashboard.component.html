@@ -30,15 +30,13 @@
               <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--AddTo"></i></span>
               <span class="ms-CommandButton-label">Создать</span>
             </button>
-
           </div>
 
           <h1 class="ms-font-xxl">Элементы</h1>
         </div>
         <div class="ms-Grid-row">
-          <elements-list [localElements]="elementsSet" (onSetFavorite)="onDataChange($event)"></elements-list>
+          <elements-list [itemsList]="elementsSet" (onSetFavorite)="onDataChange($event)"></elements-list>
         </div>
-        <h1 *ngIf="elementsSet.length == 0" class="ms-font-xxl">Нет элементов для отображения</h1>
       </div>
     </div>
 
@@ -48,9 +46,8 @@
           <h1 class="ms-font-xxl">Избранное</h1>
         </div>
         <div class="ms-Grid-row">
-          <elements-list [localElements]="favoriteSet" (onSetFavorite)="onDataChange($event)"></elements-list>
+          <elements-list [itemsList]="favoriteSet" (onSetFavorite)="onDataChange($event)"></elements-list>
         </div>
-        <h1 *ngIf="favoriteSet.length == 0" class="ms-font-xxl">Список избранного пуст</h1>
       </div>
     </div>
 

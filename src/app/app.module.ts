@@ -34,6 +34,7 @@ import { FilesListComponent } from './components/files/files-list/files-list.com
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { AddFilePanelComponent } from './components/files/add-file-panel/add-file-panel.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { TinymceEditorDirective } from './directives/tiny-editor.directive';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { FileUploaderComponent } from './components/file-uploader/file-uploader.
     FilesListComponent,
     DeleteItemComponent,
     AddFilePanelComponent,
-    FileUploaderComponent
+    FileUploaderComponent,
+    TinymceEditorDirective
   ],
   imports: [
     BrowserModule,
