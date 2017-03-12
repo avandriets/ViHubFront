@@ -42,10 +42,9 @@ export class TinymceEditorDirective implements AfterViewInit, ControlValueAccess
     //   'insertdatetime media nonbreaking save table contextmenu directionality',
     //   'emoticons template paste textcolor colorpicker textpattern imagetools codesample'
     // ],
-    plugins: ['link paste'],
+    plugins: ['link paste table'],
     toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
     toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-    image_advtab: true,
     skin_url: 'assets/skins/lightgray',
     menubar: false
   }
@@ -109,16 +108,16 @@ export class TinymceEditorDirective implements AfterViewInit, ControlValueAccess
     options['init_instance_callback'] = function (editor) {
       that.writeValue(that.ngModel);
       editor.on('change', function (e) {
-        that.valueChange();
+        //that.valueChange();
       });
       editor.on('blur', function (e) {
         that.valueOnChange(true);
       });
       editor.on('keyup', function (e) {
-        that.valueChange();
+        //that.valueChange();
       });
       editor.on('PastePostProcess', function (e) {
-        that.valueChange();
+        //that.valueChange();
       });
     }
 

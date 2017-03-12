@@ -47,7 +47,9 @@
             </div>
 
 
-          <div class="ms-fontSize-l">{{ element.description }}</div>
+          <div class="ms-fontSize-l">
+            <div innerHTML="{{ element.description }}"></div>
+          </div>
 
           <div class="th-hover-active-bar">
             <div (click)="openEditElementPanel()"

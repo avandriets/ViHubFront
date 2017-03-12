@@ -1,5 +1,9 @@
 import {BaseObject} from "./base-object";
 
+function htmlToPlaintext(text) {
+  return text ? String(text).replace(/<[^>]+>/gm, '') : '';
+}
+
 export class ElementVi extends BaseObject {
   element: number;
   parent: number;
@@ -31,9 +35,13 @@ export class ElementVi extends BaseObject {
     return this;
   }
 
+  //TODO make filter plain text
   public getShortDescription(): string {
-    if (this.description.length > 200)
-      return this.description.substr(0, this.description.indexOf(" ", 200)) + " ...";
+    if (this.description.length > 200) {
+      let templ = htmlToPlaintext(this.description);
+      templ = templ.substr(0, this.description.indexOf(" ", 200)) + " ...";
+      return templ;
+    }
     else
       return this.description;
   }
