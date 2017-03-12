@@ -100,7 +100,7 @@ export class TinymceEditorDirective implements AfterViewInit, ControlValueAccess
       options['selector'] = ".wysiwyg";
     }
 
-    options['height'] = 500;
+    options['height'] = 100;
     options['schema'] = "html5";
     options['theme'] = "modern";
 

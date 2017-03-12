@@ -1,6 +1,4 @@
 <view-members-dialog [currentElement]="element"></view-members-dialog>
-<add-members-dialog [currentElement]="element"></add-members-dialog>
-
 
 <add-note-panel [parentElement]="element" (onAddNote)="dataChange($event)"></add-note-panel>
 <edit-note-dialog (onSaveNote)="dataChange($event)"></edit-note-dialog>
@@ -65,10 +63,6 @@
             <div (click)="onClickMembersView(element)"
             class="th-Card-action"><i
               class="ms-Icon ms-Icon--People "></i> Пользователи
-            </div>
-            <div (click)="onClickAddMember(element)"
-            class="th-Card-action"><i
-              class="ms-Icon ms-Icon--PeopleAdd "></i> Добавить пользователя
             </div>
           </div>
         </div>

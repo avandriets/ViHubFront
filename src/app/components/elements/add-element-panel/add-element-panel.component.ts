@@ -5,6 +5,7 @@ import {TransportObject} from "../../../classes/base-objects/transport-object";
 import {ElementsService} from "../../../services/elements.service";
 import {WindowRef} from "../../../services/window-ref.service";
 import {BaseObject} from "../../../classes/base-objects/base-object";
+import {BaseDialogNew} from "../../../classes/base-objects/base-dialog-new";
 
 @Component({
   selector: 'add-element-panel',
@@ -12,8 +13,7 @@ import {BaseObject} from "../../../classes/base-objects/base-object";
   styleUrls: ['add-element-panel.component.scss']
 })
 
-
-export class AddElementPanelComponent extends BasePanel {
+export class AddElementPanelComponent extends BaseDialogNew {
 
   @Input() parentElement: ElementVi;
   @Output() onAddElement = new EventEmitter<TransportObject>();
@@ -29,8 +29,9 @@ export class AddElementPanelComponent extends BasePanel {
     ];
 
   constructor(public elementService: ElementsService, public winRef: WindowRef) {
-    super(winRef, elementService);
+    super(winRef);
     this.spinnerText = "Сохраенение элемента ...";
+    this.dialogID = "#addElementPanelID";
   }
 
   getEventEmitter(): any {
@@ -38,15 +39,14 @@ export class AddElementPanelComponent extends BasePanel {
   }
 
   check_permission(): void {
-    //super.check_permission();
   }
 
   getCurrentObject(): BaseObject {
     return undefined;
   }
 
-  initComponent(): void {
-    this.panelTemplate = document.querySelector("#addElementPanelID");
+  doChangeDescription():void{
+
   }
 
   onCreateElement(): void {
@@ -58,12 +58,6 @@ export class AddElementPanelComponent extends BasePanel {
       this.errorMessage = 'Заполните поле название.';
       return;
     }
-
-    // if (this.description == null || this.description == ' ' || this.description.length == 0) {
-    //     this.hasError = true;
-    //     this.errorMessage = 'Заполните описание.';
-    //     return;
-    // }
 
     if (this.element_type == null) {
       this.element_type = 'W';
@@ -94,7 +88,8 @@ export class AddElementPanelComponent extends BasePanel {
         this.inProcess = false;
 
         //Close panel
-        this.panelInstance.dismiss();
+        this.closeDialog();
+        // this.panelInstance.dismiss();
       })
       .catch((error) => {
         this.errorMessage = error;

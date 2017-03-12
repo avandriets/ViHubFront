@@ -25,7 +25,6 @@ import { ElementsListVarComponent } from './components/elements/elements-list-va
 import { NotesListComponent } from './components/notes/notes-list/notes-list.component';
 import { MessagesListComponent } from './components/messages/messages-list/messages-list.component';
 import { ViewMemberDialogComponent } from './components/members/view-member-dialog/view-member-dialog.component';
-import { AddMemberDialogComponent } from './components/members/add-member-dialog/add-member-dialog.component';
 import { RegisterUserComponent } from './components/users/register-user/register-user.component';
 import {CanActivateNotSignIn} from "./classes/can-activate-not-sign-in";
 import { EditProfileComponent } from './components/users/edit-profile/edit-profile.component';
@@ -59,7 +58,6 @@ import { TinymceEditorDirective } from './directives/tiny-editor.directive';
     NotesListComponent,
     MessagesListComponent,
     ViewMemberDialogComponent,
-    AddMemberDialogComponent,
     RegisterUserComponent,
     EditProfileComponent,
     ChangePasswordComponent,

@@ -18,7 +18,6 @@ import {DeleteNoteDialogComponent} from "../notes/delete-note-dialog/delete-note
 import {LoginService} from "../../services/login.service";
 import {NotesService} from "../../services/notes.service";
 import {MessagesService} from "../../services/messages.service";
-import {AddMemberDialogComponent} from "../members/add-member-dialog/add-member-dialog.component";
 import {ViewMemberDialogComponent} from "../members/view-member-dialog/view-member-dialog.component";
 import {MembersService} from "../../services/members.service";
 import {FilesService} from "../../services/files.service";
@@ -77,7 +76,6 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   @ViewChild(DeleteMessageDialogComponent) deleteMessageDialog: DeleteMessageDialogComponent;
   @ViewChild(EditMessagePanelComponent) editMessagePanel: EditMessagePanelComponent;
 
-
   //Note actions
   @ViewChild(AddNotePanelComponent) addNotePanel: AddNotePanelComponent;
   @ViewChild(EditNoteDialogComponent) editNoteDialog: EditNoteDialogComponent;
@@ -85,8 +83,6 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
 
   //USer action
   @ViewChild(ViewMemberDialogComponent) membersViewDialog: ViewMemberDialogComponent;
-  @ViewChild(AddMemberDialogComponent) addMemberDialog: AddMemberDialogComponent;
-
 
   onCreateMessage(): void {
     this.addMessageObjectPanel.openPanel();
@@ -97,7 +93,8 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   }
 
   openAddElement(): void {
-    this.addPanelObject.openPanel();
+    //this.addPanelObject.openPanel();
+    this.addPanelObject.openDialog();
   }
 
   openEditElementPanel(): void {
@@ -109,13 +106,7 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   }
 
   onClickMembersView(): void {
-    this.membersViewDialog.initDialog();
-    this.membersViewDialog.openDialog();
-  }
-
-  onClickAddMember(): void {
-    this.addMemberDialog.initDialog();
-    this.addMemberDialog.openDialog();
+    this.membersViewDialog.openPanel();
   }
 
   onAddAttachment(): void {

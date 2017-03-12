@@ -123,6 +123,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   openAddElement(): void {
-    this.addPanelObject.openPanel();
+    //this.addPanelObject.openPanel();
+    this.addPanelObject.openDialog();
   }
 }

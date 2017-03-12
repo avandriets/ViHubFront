@@ -1,52 +1,83 @@
-<div class="ms-Dialog" id="ViewMemberDialogID">
-    <spinner-component *ngIf="inProcess" [SupportText]="spinnerText"></spinner-component>
-    <br>
-    <div class="ms-Dialog-title">Список пользователей</div>
-    <div class="ms-Dialog-content">
+<div class="ms-Panel" id="MembersPanelID">
+  <button class="ms-Panel-closeButton ms-PanelAction-close">
+    <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
+  </button>
+  <spinner-component *ngIf="inProcess" [SupportText]="spinnerText"></spinner-component>
+  <br>
+  <div class="ms-Panel-contentInner">
 
-        <div *ngIf="hasError">
-            <div class="ms-MessageBar ms-MessageBar--error">
-                <div class="ms-MessageBar-content">
-                    <div class="ms-MessageBar-icon">
-                        <i class="ms-Icon ms-Icon--xCircle"></i>
-                    </div>
-                    <div class="ms-MessageBar-text">
-                        {{ errorMessage }}
-                    </div>
-                </div>
+    <div class="ms-Panel-content">
+
+      <div *ngIf="hasError">
+        <div class="ms-MessageBar ms-MessageBar--error">
+          <div class="ms-MessageBar-content">
+            <div class="ms-MessageBar-icon">
+              <i class="ms-Icon ms-Icon--xCircle"></i>
             </div>
-            <br>
-        </div>
-
-        <div class="ms-PeoplePicker ms-PeoplePicker--facePile">
-            <div class="ms-PeoplePicker-selected is-active">
-
-                <ul class="ms-PeoplePicker-selectedPeople">
-
-                    <li *ngFor="let user of membersList" class="ms-PeoplePicker-selectedPerson " tabindex="1">
-                        <div class="ms-Persona ms-Persona--sm">
-                            <div class="ms-Persona-imageArea">
-                                <div class="ms-Persona-initials ms-Persona-initials--blue">RM</div>
-                            </div>
-                            <div class="ms-Persona-presence"></div>
-                            <div class="ms-Persona-details">
-                                <div class="ms-Persona-primaryText">{{ user.first_name }} {{ user.last_name }}</div>
-                                <div class="ms-Persona-secondaryText">{{ user.email }}</div>
-                            </div>
-                        </div>
-                        <button *ngIf="currentElement.owner!=user.id && !inProcess && !permission_denied" (click)="deleteUser(user)" class="ms-PeoplePicker-resultAction"><i class="ms-Icon ms-Icon--Clear"></i>
-                        </button>
-                    </li>
-
-                </ul>
+            <div class="ms-MessageBar-text">
+              {{ errorMessage }}
             </div>
+          </div>
         </div>
+        <br>
+      </div>
 
-    </div>
-
-    <div class="ms-Dialog-actions">
-        <button class="ms-Button ms-Dialog-action">
-            <span class="ms-Button-label">Отмена</span>
+      <div [ngClass]="{'ms-TextField':true, 'ms-TextField-Button-icon': true, 'is-disabled':inProcess || permission_denied}">
+        <input [(ngModel)]="searchString" class="ms-TextField-field" type="text">
+        <button (click)="searchMembers()" class="ms-Button ms-Button--primary">
+          <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--Search"></i></span>
         </button>
+      </div>
+
+      <p *ngIf="foundMembersList.length" class="ms-Panel-headerText">Найденные пользователи</p>
+
+      <div class="ms-PeoplePicker ms-PeoplePicker--facePile">
+        <div class="ms-PeoplePicker-selected is-active">
+          <ul class="ms-PeoplePicker-selectedPeople">
+
+            <li *ngFor="let user of foundMembersList" class="ms-PeoplePicker-selectedPerson " tabindex="1">
+              <div class="ms-Persona ms-Persona--sm">
+                <div class="ms-Persona-imageArea">
+                  <div class="ms-Persona-initials ms-Persona-initials--blue">RM</div>
+                </div>
+                <div class="ms-Persona-presence"></div>
+                <div class="ms-Persona-details">
+                  <div class="ms-Persona-primaryText">{{ user.first_name }} {{ user.last_name }}</div>
+                  <div class="ms-Persona-secondaryText">{{ user.email }}</div>
+                </div>
+              </div>
+              <button *ngIf="!inProcess" (click)="addUser(user)" class="ms-PeoplePicker-resultAction"><i class="ms-Icon ms-Icon--CalculatorAddition"></i>
+              </button>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <p class="ms-Panel-headerText">Пользователи элемента</p>
+      <div class="ms-PeoplePicker ms-PeoplePicker--facePile">
+        <div class="ms-PeoplePicker-selected is-active">
+
+          <h1 *ngIf="membersList.length == 0" class="ms-font-xxl">Нет элементов для отображения</h1>
+          <ul class="ms-PeoplePicker-selectedPeople">
+            <li *ngFor="let user of membersList" class="ms-PeoplePicker-selectedPerson " tabindex="1">
+              <div class="ms-Persona ms-Persona--sm">
+                <div class="ms-Persona-imageArea">
+                  <div class="ms-Persona-initials ms-Persona-initials--blue">RM</div>
+                </div>
+                <div class="ms-Persona-presence"></div>
+                <div class="ms-Persona-details">
+                  <div class="ms-Persona-primaryText">{{ user.first_name }} {{ user.last_name }}</div>
+                  <div class="ms-Persona-secondaryText">{{ user.email }}</div>
+                </div>
+              </div>
+              <button *ngIf="currentElement.owner!=user.id && !inProcess && !permission_denied" (click)="deleteUser(user)" class="ms-PeoplePicker-resultAction"><i class="ms-Icon ms-Icon--Clear"></i>
+              </button>
+            </li>
+
+          </ul>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

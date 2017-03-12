@@ -32,7 +32,7 @@ export class MembersService {
       .get(url, {headers: this.headers})
       .toPromise()
       .then((response) => {
-        return response.json() as UserVi[];
+        return UserVi.createFromJsonArray(response.json() as UserVi[]);
       })
       .catch(this.handleError);
   }
