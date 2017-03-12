@@ -45,7 +45,7 @@ export class AddElementPanelComponent extends BaseDialogNew {
     return undefined;
   }
 
-  doChangeDescription():void{
+  doChangeDescription(): void {
 
   }
 
