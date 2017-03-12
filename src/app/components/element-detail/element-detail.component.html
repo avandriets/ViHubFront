@@ -39,69 +39,139 @@
 
       <div class="page-heading-xxl th-active-bar">
         <div class="m-b-1">
-            <div class="ms-fontSize-xl">{{ element.name }}</div>
-            <div>{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
-              {{ element.first_name }} {{ element.last_name }}
-            </div>
+
+          <div class="ms-CommandButton tm-CommandButton">
+            <button class="ms-CommandButton-button">
+              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--FavoriteStar"></i></span>
+              <span class="ms-CommandButton-label"> </span>
+            </button>
+            <button class="ms-CommandButton-button">
+              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Location"></i></span>
+              <span class="ms-CommandButton-label"> </span>
+            </button>
+            <button class="ms-CommandButton-button">
+              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--GlobalNavButton"></i></span>
+              <span class="ms-CommandButton-label"> </span>
+            </button>
+            <ul class="ms-ContextualMenu is-hidden">
+              <li class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Animals</a>
+              </li>
+              <li class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Books</a>
+              </li>
+              <li class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link is-selected" tabindex="1">Education</a>
+              </li>
+              <li class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Music</a>
+              </li>
+              <li class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link is-disabled" tabindex="1">Sports</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="ms-fontSize-xxl">{{ element.name }}</div>
+          <div class="m-b-1">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
+            {{ element.first_name }} {{ element.last_name }}
+          </div>
 
 
-          <div class="ms-fontSize-l">
+          <div class="ms-fontSize-l m-b-1">
             <div innerHTML="{{ element.description }}"></div>
           </div>
 
+          <div class="ms-Link" alt="Еще" title="Еще">Еще <i class="ms-Icon ms-Icon--DoubleChevronDown ms-font-mi"></i><i
+            class="ms-Icon ms-Icon--DoubleChevronUp ms-font-mi"></i></div>
+
+
           <div class="th-hover-active-bar">
             <div (click)="openEditElementPanel()"
-            class="th-Card-action"><i
+                 class="th-Card-action"><i
               class="ms-Icon ms-Icon--Edit "></i>
               Редактировать
             </div>
             <div (click)="onClickDeleteElement(element)"
-            class="th-Card-action"><i
+                 class="th-Card-action"><i
               class="ms-Icon ms-Icon--Delete "></i> Удалить
             </div>
 
             <div (click)="onClickMembersView(element)"
-            class="th-Card-action"><i
+                 class="th-Card-action"><i
               class="ms-Icon ms-Icon--People "></i> Пользователи
             </div>
           </div>
         </div>
       </div>
 
-      <!--СООБЩЕНИЯ-->
+
       <div class="ms-Grid-row">
-        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg4 ms-u-xl4">
-          <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{messagesSet.length}}</span> ({{messagesSet.length}})</p>
-          <div class="page-heading">
-            <div class="ms-PanelExample th-CommandButton">
-              <button (click)="onCreateMessage()" class="ms-Button th-Button-Icon">
-                <i class="ms-Icon ms-Icon--AddTo"></i>
+
+        <div class="ms-List-item ms-Grid-col ms-u-sm12">
+          <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{elementsSet.length}}</span>
+            ({{elementsSet.length}})</p>
+
+          <div class="page-heading-xxl">
+
+            <div class="ms-CommandButton">
+              <button (click)="openAddElement()"
+                      class="ms-Button ms-CommandButton-button">
+                            <span class="ms-CommandButton-icon"><i
+                              class="ms-Icon ms-Icon--AddTo"></i></span>
+                <span class="ms-CommandButton-label">Создать</span>
               </button>
-              <div class="ms-Panel ms-Panel--md">
-                <button class="ms-Panel-closeButton ms-PanelAction-close">
-                  <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
-                </button>
-                <div class="ms-Panel-contentInner">
-                  <p class="ms-Panel-headerText">Medium Panel</p>
-                  <div class="ms-Panel-content">
-                    <span class="ms-font-m">Content goes here</span>
-                  </div>
-                </div>
-              </div>
             </div>
-            <h4>Сообщения</h4>
+
+            <h1 class="ms-font-xxl">Подчиненные элементы</h1>
           </div>
 
-          <messages-list [addNoteDialogLocal]="addNotePanel"
-                         [itemsList]="messagesSet"
-                         [deleteMessageDialog]="deleteMessageDialog"
-                         [editMessageDialog]="editMessagePanel">
-            Загрузка ...
-          </messages-list>
+          <div class="ms-Grid-row">
+
+            <elements-list-var [itemsList]="elementsSet" (onSetFavorite)="dataChange($event)">
+              Загрузка ...
+            </elements-list-var>
+
+          </div>
+
         </div>
 
+        <!--СООБЩЕНИЯ-->
+        <!--
+
+                <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg4 ms-u-xl4">
+                  <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{messagesSet.length}}</span> ({{messagesSet.length}})</p>
+                  <div class="page-heading">
+                    <div class="ms-PanelExample th-CommandButton">
+                      <button (click)="onCreateMessage()" class="ms-Button th-Button-Icon">
+                        <i class="ms-Icon ms-Icon&#45;&#45;AddTo"></i>
+                      </button>
+                      <div class="ms-Panel ms-Panel&#45;&#45;md">
+                        <button class="ms-Panel-closeButton ms-PanelAction-close">
+                          <i class="ms-Panel-closeIcon ms-Icon ms-Icon&#45;&#45;Cancel"></i>
+                        </button>
+                        <div class="ms-Panel-contentInner">
+                          <p class="ms-Panel-headerText">Medium Panel</p>
+                          <div class="ms-Panel-content">
+                            <span class="ms-font-m">Content goes here</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <h4>Сообщения</h4>
+                  </div>
+
+                  <messages-list [addNoteDialogLocal]="addNotePanel"
+                                 [itemsList]="messagesSet"
+                                 [deleteMessageDialog]="deleteMessageDialog"
+                                 [editMessageDialog]="editMessagePanel">
+                    Загрузка ...
+                  </messages-list>
+                </div>
+        -->
+
         <!--ЗАМЕТКИ-->
-        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl4">
+        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
           <p class="m-b-05 ms-u-textAlignRight"><span
             class="color-primary">{{notesSet.length}}</span> ({{notesSet.length}})</p>
           <div class="page-heading">
@@ -133,7 +203,7 @@
         </div>
 
         <!--ФАЙЛЫ-->
-        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-lg4 ms-u-xl4">
+        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
           <p class="m-b-05 ms-u-textAlignRight"><span
             class="color-primary">{{attachmentSet.length}}</span> ({{attachmentSet.length}})</p>
           <div class="page-heading">
@@ -163,32 +233,6 @@
 
         <div class="ms-u-clearfix"></div>
 
-        <div class="ms-List-item ms-Grid-col ms-u-sm12">
-          <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{elementsSet.length}}</span> ({{elementsSet.length}})</p>
-
-          <div class="page-heading-xxl">
-
-            <div class="ms-CommandButton">
-              <button (click)="openAddElement()"
-                      class="ms-Button ms-CommandButton-button">
-                            <span class="ms-CommandButton-icon"><i
-                              class="ms-Icon ms-Icon--AddTo"></i></span>
-                <span class="ms-CommandButton-label">Создать</span>
-              </button>
-            </div>
-
-            <h1 class="ms-font-xxl">Элементы</h1>
-          </div>
-
-          <div class="ms-Grid-row">
-
-            <elements-list-var [itemsList]="elementsSet" (onSetFavorite)="dataChange($event)">
-              Загрузка ...
-            </elements-list-var>
-
-          </div>
-
-        </div>
       </div>
     </div>
   </div>

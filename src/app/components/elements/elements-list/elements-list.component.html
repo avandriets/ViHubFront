@@ -1,23 +1,29 @@
-<h1 *ngIf="itemsList.length == 0" class="ms-font-xxl">Нет элементов для отображения</h1>
+<div *ngIf="itemsList.length == 0" class="ms-Grid-col ms-u-sm12 m-b-2 ms-fontSize-l">
+  Нет элементов для отображения
+</div>
 
 <div *ngIf="elementService.cardView == true" class="yyy1">
-    <ul *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
-        <li class="ms-ListItem b-t-1 ms-ListItem--document">
-            <div class="ms-fontWeight-semibold">{{ element.name }}</div>
-            <div class="">
-                {{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
-                {{ element.first_name }} {{ element.last_name }}</div>
-            <div>&nbsp;</div>
-            <div class="ms-fontSize-l">
-              <div innerHTML="{{ element.getShortDescription() }}"></div>
-            </div>
+  <ul *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
+    <li (click)="gotoDetail(element)" class="ms-ListItem b-t-1 ms-ListItem--document th-link">
+      <div class="ms-fontWeight-regular ms-fontSize-l">{{ element.name }}</div>
+      <div class="">
+        {{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
+        {{ element.first_name }} {{ element.last_name }}
+      </div>
+      <div>&nbsp;</div>
+      <div class="ms-fontSize-l">
+        <div innerHTML="{{ element.getShortDescription() }}"></div>
+      </div>
 
-            <div (click)="gotoDetail(element)" class="ms-Link ms-u-textAlignRight" alt="Перейти к элементу" title="Перейти к элементу">Перейти ...</div>
+      <div class="ms-Link ms-u-textAlignRight" alt="Перейти к элементу" title="Перейти к элементу">Перейти ...</div>
 
-            <div class="ms-ListItem-actions">
-                <div (click)="changeFavorite(element)" data-action-id="favorite" class="ms-ListItem-action" alt="Добавить в избранное" title="Добавить в избранное" tabindex="5"><i [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i></div>
-            </div>
-        </li>
-    </ul>
+      <div class="ms-ListItem-actions">
+        <div (click)="changeFavorite(element)" data-action-id="favorite" class="ms-ListItem-action"
+             alt="Добавить в избранное" title="Добавить в избранное" tabindex="5"><i
+          [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i>
+        </div>
+      </div>
+    </li>
+  </ul>
 
 </div>

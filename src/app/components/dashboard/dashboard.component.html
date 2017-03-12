@@ -20,7 +20,62 @@
     <br>
   </div>
 
+    <div *ngIf="!loading" class="ms-Grid">
+    <p class="m-b-05">количество <span class="color-primary">{{elementsSet.length}}</span></p>
+    <div class="ms-Grid-row">
+      <div class="ms-Grid-col ms-u-sm12">
+        <div class="page-heading-xxl">
+          <h1 class="ms-font-xxl">Сигналы</h1>
+        </div>
+        <div class="ms-Grid-row">
+            <div class="yyy1">
+              <ul class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
+                <li class="ms-ListItem b-t-pr-1 ms-ListItem--document">
+                  <div class="ms-fontWeight-semibold">Первый сигнал 1</div>
+                  <div class="">
+                    18.10.2016 11:54
+                    Alex Andriets
+                  </div>
+                  <div>&nbsp;</div>
+                  <div class="ms-fontSize-l">
+                    <div
+                      ng-reflect-inner-h-t-m-l="&amp;#1054;&amp;#1087;&amp;#1080;&amp;#1089;&amp;#1072;&amp;#1085;&amp;#1080;&amp;#1077; &amp;#1087;&amp;#1077;&amp;#1088;&amp;#1074;&amp;#1086;&amp;#1081; &amp;#1079;&amp;#1072;&amp;#1084;&amp;#1077;&amp;#1090;&amp;#1082;&amp;#1080;">
+                      Описание первой заметки
+                    </div>
+                  </div>
+
+                  <div alt="Перейти к элементу" class="ms-Link ms-u-textAlignRight" title="Перейти к элементу">Перейти
+                    ...
+                  </div>
+
+                  <div class="ms-ListItem-actions">
+
+                    <div class="ms-ListItem-action"><i class="ms-Icon ms-Icon--Location"></i></div>
+                    <div alt="Добавить в избранное" class="ms-ListItem-action" data-action-id="favorite" tabindex="5"
+                         title="Добавить в избранное"><i ng-reflect-ng-class="[object Object]"
+                                                         class="ms-Icon ms-Icon--FavoriteStar"></i></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div *ngIf="!loading" class="ms-Grid">
+    <div class="ms-Grid-row">
+      <div class="ms-Grid-col ms-u-sm12">
+        <div class="page-heading-xxl">
+          <h1 class="ms-font-xxl">Избранное</h1>
+        </div>
+        <div class="ms-Grid-row">
+          <elements-list [itemsList]="favoriteSet" (onSetFavorite)="onDataChange($event)"></elements-list>
+        </div>
+      </div>
+    </div>
+
     <p class="m-b-05">количество <span class="color-primary">{{elementsSet.length}}</span></p>
     <div class="ms-Grid-row">
       <div class="ms-Grid-col ms-u-sm12">
@@ -40,16 +95,6 @@
       </div>
     </div>
 
-    <div class="ms-Grid-row">
-      <div class="ms-Grid-col ms-u-sm12">
-        <div class="page-heading-xxl">
-          <h1 class="ms-font-xxl">Избранное</h1>
-        </div>
-        <div class="ms-Grid-row">
-          <elements-list [itemsList]="favoriteSet" (onSetFavorite)="onDataChange($event)"></elements-list>
-        </div>
-      </div>
-    </div>
 
   </div>
 </main>

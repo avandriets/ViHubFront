@@ -5785,6 +5785,9 @@ main {
 .b-t-1 {
   border-top: 1px solid rgba(0, 0, 0, 0.4); }
 
+.b-t-pr-1 {
+  border-top: 1px solid #e81123; }
+
 .b-t-2 {
   border-top: 2px solid rgba(0, 0, 0, 0.4); }
 
@@ -5862,8 +5865,6 @@ header {
         color: #a80000; }
   .page-heading-xxl h1 {
     line-height: 40px; }
-  .page-heading-xxl div {
-    line-height: 20px; }
   .page-heading-xxl .ms-fontSize-xl {
     line-height: 1.2; }
 
@@ -5907,6 +5908,11 @@ header {
 .ms-Button.ms-Button--primary:hover {
   background-color: #a80000;
   border-color: #a80000; }
+
+.ms-CommandButton.tm-CommandButton .ms-CommandButton-button {
+  text-align: center; }
+.ms-CommandButton.tm-CommandButton .ms-CommandButton-icon {
+  margin-right: 0; }
 
 .ms-Card {
   color: rgba(0, 0, 0, 0.87);
@@ -6049,6 +6055,28 @@ header {
 
 .ms-CommandBar {
   display: none; }
+
+.ms-Dialog-Right {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  padding: 40px 32px 20px;
+  background: white;
+  z-index: 10;
+  transition: all 0.3s;
+  min-width: 320px;
+  width: 30%;
+  box-shadow: -30px 0 30px -30px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  margin-right: 15px; }
+  .ms-Dialog-Right.is-open {
+    right: 0; }
+
+.th-link {
+  cursor: pointer; }
 
 .ms-Link {
   color: #e81123;

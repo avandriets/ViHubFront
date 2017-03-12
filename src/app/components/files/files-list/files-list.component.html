@@ -2,7 +2,8 @@
 
 <h2 *ngIf="itemsList.length == 0" class="ms-font-xl">Нет загруженных файлов</h2>
 
-<div class="m-b-2 th-active-bar" *ngFor="let item of itemsList" tabindex="0">
+<div class="m-b-2 th-active-bar" *ngFor="let item of itemsList" tabindex="0"
+     [ngStyle]="{'background': 'url('+item.fileURL+') center center ', 'background-size': 'cover'}">
   <div class="ms-Persona">
     <div *ngIf="isImage(item)" class="ms-Persona-imageArea">
       <img  class="ms-Persona-image" src="{{item.fileURL}}">
