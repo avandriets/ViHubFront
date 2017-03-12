@@ -45,7 +45,7 @@ export class TinymceEditorDirective implements AfterViewInit, ControlValueAccess
     plugins: ['link paste table'],
     toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
     toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-    skin_url: 'assets/skins/lightgray',
+    skin_url: '/assets/skins/lightgray',
     menubar: false
   }
 
