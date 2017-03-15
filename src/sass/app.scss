@@ -4,8 +4,8 @@
 
 $text-color-primary:  unquote("rgba(0, 0, 0, 0.87)") !default;//green; //
 $text-color-secondary: unquote("rgba(0, 0, 0, 0.54)") !default;
-$color-primary: $ms-color-red;
-$color-primary-dark: $ms-color-redDark;
+$color-primary: #0078d7;
+$color-primary-dark: #106ebe;
 $border: rgba(0,0,0,0.4);
 //$color-accent: '$color-accent';
 
@@ -61,6 +61,15 @@ main{
 .color-primary{
   color: $color-primary;
 }
+
+  .th-icon-link{
+    cursor: pointer;
+    font-size: 16px;
+    color:  $color-primary;
+    &:hover{
+       color:  $color-primary-dark;
+    }
+  }
 //
 $header-height: 50px;
 header{

@@ -5786,7 +5786,7 @@ main {
   border-top: 1px solid rgba(0, 0, 0, 0.4); }
 
 .b-t-pr-1 {
-  border-top: 1px solid #e81123; }
+  border-top: 1px solid #0078d7; }
 
 .b-t-2 {
   border-top: 2px solid rgba(0, 0, 0, 0.4); }
@@ -5801,7 +5801,14 @@ main {
   margin-bottom: 32px !important; }
 
 .color-primary {
-  color: #e81123; }
+  color: #0078d7; }
+
+.th-icon-link {
+  cursor: pointer;
+  font-size: 16px;
+  color: #0078d7; }
+  .th-icon-link:hover {
+    color: #106ebe; }
 
 header {
   background-color: #ffffff;
@@ -5853,16 +5860,16 @@ header {
     .page-heading-xxl .ms-CommandButton .ms-CommandButton-button {
       border-color: transparent;
       background-color: transparent;
-      color: #e81123; }
+      color: #0078d7; }
       .page-heading-xxl .ms-CommandButton .ms-CommandButton-button .ms-CommandButton-label {
-        color: #e81123;
+        color: #0078d7;
         text-transform: uppercase; }
     .page-heading-xxl .ms-CommandButton:hover .ms-CommandButton-button {
       border-color: transparent;
       background-color: transparent;
-      color: #a80000; }
+      color: #106ebe; }
       .page-heading-xxl .ms-CommandButton:hover .ms-CommandButton-button .ms-CommandButton-label {
-        color: #a80000; }
+        color: #106ebe; }
   .page-heading-xxl h1 {
     line-height: 40px; }
   .page-heading-xxl .ms-fontSize-xl {
@@ -5879,13 +5886,13 @@ header {
     .page-heading .th-CommandButton .th-Button-Icon {
       border-color: transparent;
       background-color: transparent;
-      color: #e81123;
+      color: #0078d7;
       min-width: 32px;
       padding: 4px 4px 6px; }
     .page-heading .th-CommandButton:hover {
       border-color: transparent;
       background-color: transparent;
-      color: #a80000; }
+      color: #106ebe; }
 
 .ms-Breadcrumb {
   margin: 0 0 8px 0; }
@@ -5900,14 +5907,14 @@ header {
 
 .ms-Breadcrumb-chevron {
   margin: 4px 8px;
-  color: #e81123; }
+  color: #0078d7; }
 
 .ms-Button.ms-Button--primary {
-  background-color: #e81123;
-  border-color: #e81123; }
+  background-color: #0078d7;
+  border-color: #0078d7; }
 .ms-Button.ms-Button--primary:hover {
-  background-color: #a80000;
-  border-color: #a80000; }
+  background-color: #106ebe;
+  border-color: #106ebe; }
 
 .ms-CommandButton.tm-CommandButton .ms-CommandButton-button {
   text-align: center; }
@@ -6026,11 +6033,11 @@ header {
 .ms-Card-overflow {
   display: none;
   font-size: 14px;
-  color: #e81123;
+  color: #0078d7;
   float: right;
   margin-top: -1px; }
   .ms-Card-overflow:hover {
-    color: #e81123; }
+    color: #0078d7; }
 
 .ms-Card-orgChart {
   position: absolute;
@@ -6079,10 +6086,10 @@ header {
   cursor: pointer; }
 
 .ms-Link {
-  color: #e81123;
+  color: #0078d7;
   font-weight: 400; }
   .ms-Link:hover, .ms-Link:focus {
-    color: #a80000; }
+    color: #106ebe; }
 
 .ms-List, .ms-ListItem {
   font-size: 14px;
@@ -6116,7 +6123,7 @@ header {
   font-weight: 100; }
 
 .ms-Persona-initials--primary {
-  background-color: #e81123; }
+  background-color: #0078d7; }
 
 .ms-Persona-image {
   position: absolute;
@@ -6173,7 +6180,7 @@ header {
   height: 36px;
   line-height: 36px;
   padding-right: 10px;
-  color: #e81123;
+  color: #0078d7;
   outline: transparent;
   position: relative; }
   @media (min-width: 1024px) {
@@ -6186,8 +6193,8 @@ header {
     font-size: 16px;
     line-height: 34px; }
   .th-Card-action:hover {
-    color: #a80000; }
+    color: #106ebe; }
   .th-Card-action:active {
-    color: #a80000; }
+    color: #106ebe; }
 
 /*# sourceMappingURL=app.css.map */

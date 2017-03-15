@@ -11,7 +11,8 @@ import {BaseItemsList} from "../../../classes/base-objects/base-items-list";
 
 @Component({
   selector: 'files-list',
-  templateUrl: './files-list.component.html'
+  templateUrl: './files-list.component.html',
+  styleUrls: ['./files-list.component.scss']
 })
 export class FilesListComponent extends BaseItemsList<Attachment> implements ActionDeleteItem {
 
