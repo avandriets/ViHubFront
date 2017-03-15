@@ -16,6 +16,7 @@ export class ElementVi extends BaseObject {
   username: string;
   first_name: string;
   last_name: string;
+  is_signal: boolean;
 
   assign(elementIn: ElementVi): ElementVi {
     super.assign(elementIn);
@@ -31,18 +32,19 @@ export class ElementVi extends BaseObject {
     this.username = elementIn.username;
     this.first_name = elementIn.first_name;
     this.last_name = elementIn.last_name;
+    this.is_signal = elementIn.is_signal;
 
     return this;
   }
 
   //TODO make filter plain text
   public getShortDescription(): string {
-    if (this.description.length > 200) {
-      let templ = htmlToPlaintext(this.description);
+    let templ = htmlToPlaintext(this.description);
+    if (templ.length > 200) {
       templ = templ.substr(0, this.description.indexOf(" ", 200)) + " ...";
       return templ;
     }
     else
-      return this.description;
+      return templ;
   }
 }

@@ -10,10 +10,12 @@ import {BaseDialogNew} from "../../classes/base-objects/base-dialog-new";
   templateUrl: './delete-item.component.html'
 })
 export class DeleteItemComponent extends BaseDialogNew implements OnInit, DeleteDialogItem {
+  getDialogID(): string {
+    return "#deleteItemDialogID";
+  }
 
   constructor(protected winRef: WindowRef) {
     super(winRef);
-    this.dialogID = "#deleteItemDialogID";
   }
 
   @Output() onDialogActionEvent = new EventEmitter<any>();

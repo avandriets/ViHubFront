@@ -5,7 +5,7 @@
 <delete-note-dialog (onDeleteNote)="dataChange($event)"></delete-note-dialog>
 
 <delete-element-dialog [deletedElement]="element" (onDeleteElement)="dataChange($event)"></delete-element-dialog>
-<add-element-panel [parentElement]="element" (onAddElement)="dataChange($event)"></add-element-panel>
+<add-element-panel [parentElement]="element" (onDialogActionEvent)="dataChange($event)"></add-element-panel>
 <edit-element-panel [editedElement]="element" (onEditElement)="dataChange($event)"></edit-element-panel>
 
 <add-message-panel [parentElement]="element" (onAddMessage)="dataChange($event)"></add-message-panel>
@@ -35,205 +35,189 @@
       </div>
     </div>
 
-    <div *ngIf="!loading">
+    <div class="page-heading-xxl th-active-bar">
+      <div class="m-b-1">
 
-      <div class="page-heading-xxl th-active-bar">
-        <div class="m-b-1">
-
-          <div class="ms-CommandButton tm-CommandButton">
-            <button class="ms-CommandButton-button">
-              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--FavoriteStar"></i></span>
-              <span class="ms-CommandButton-label"> </span>
-            </button>
-            <button class="ms-CommandButton-button">
-              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--Location"></i></span>
-              <span class="ms-CommandButton-label"> </span>
-            </button>
-            <button class="ms-CommandButton-button">
-              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--GlobalNavButton"></i></span>
-              <span class="ms-CommandButton-label"> </span>
-            </button>
-            <ul class="ms-ContextualMenu is-hidden">
-              <li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link" tabindex="1">Animals</a>
-              </li>
-              <li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link" tabindex="1">Books</a>
-              </li>
-              <li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link is-selected" tabindex="1">Education</a>
-              </li>
-              <li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link" tabindex="1">Music</a>
-              </li>
-              <li class="ms-ContextualMenu-item">
-                <a class="ms-ContextualMenu-link is-disabled" tabindex="1">Sports</a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="ms-fontSize-xxl">{{ element.name }}</div>
-          <div class="m-b-1">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
-            {{ element.first_name }} {{ element.last_name }}
-          </div>
-
-
-          <div class="ms-fontSize-l m-b-1">
-            <div innerHTML="{{ element.description }}"></div>
-          </div>
-
-          <div class="ms-Link" alt="Еще" title="Еще">Еще <i class="ms-Icon ms-Icon--DoubleChevronDown ms-font-mi"></i><i
-            class="ms-Icon ms-Icon--DoubleChevronUp ms-font-mi"></i></div>
-
-
-          <div class="th-hover-active-bar">
-            <div (click)="openEditElementPanel()"
-                 class="th-Card-action"><i
-              class="ms-Icon ms-Icon--Edit "></i>
-              Редактировать
-            </div>
-            <div (click)="onClickDeleteElement(element)"
-                 class="th-Card-action"><i
-              class="ms-Icon ms-Icon--Delete "></i> Удалить
-            </div>
-
-            <div (click)="onClickMembersView(element)"
-                 class="th-Card-action"><i
-              class="ms-Icon ms-Icon--People "></i> Пользователи
-            </div>
-          </div>
+        <div>
+          <button (click)="addToFavorite()" class="ms-CommandButton-button">
+            <span class="ms-CommandButton-icon">
+              <i [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i>
+            </span>
+            <span class="ms-CommandButton-label">В избранное</span>
+          </button>
+          <button (click)="setSignal()" class="ms-CommandButton-button">
+            <span class="ms-CommandButton-icon">
+              <i [ngClass]="{'ms-Icon ms-Icon--Location': true, 'ms-Icon--LocationFill ms-fontColor-red': element.is_signal}" ></i>
+            </span>
+            <span class="ms-CommandButton-label">Сигнал</span>
+          </button>
         </div>
+
+        <div id="contextMenuDetail" class="ms-CommandButton tm-CommandButton">
+          <button class="ms-Button ms-CommandButton-button viHubCommandButton">
+            <span class="ms-CommandButton-label">&nbsp;&nbsp;Действия</span>
+            <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--More"></i></span>
+          </button>
+          <ul class="ms-ContextualMenu is-hidden">
+            <li (click)="openEditElementPanel()" class="ms-ContextualMenu-item">
+              <a class="ms-ContextualMenu-link" tabindex="1">Редактировать</a>
+            </li>
+            <li (click)="onClickDeleteElement(element)" class="ms-ContextualMenu-item">
+              <a class="ms-ContextualMenu-link" tabindex="1">Удалить</a>
+            </li>
+            <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
+            <li (click)="onClickMembersView(element)" class="ms-ContextualMenu-item">
+              <a class="ms-ContextualMenu-link" tabindex="1">Пользователи</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="ms-fontSize-xxl">{{ element.name }}</div>
+        <div class="m-b-1">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
+          {{ element.first_name }} {{ element.last_name }}
+        </div>
+
+
+        <div class="ms-fontSize-l m-b-1">
+          <div innerHTML="{{ element.description|shortTex:charactersCount }}"></div>
+        </div>
+
+        <div (click)="showMore()" *ngIf="isFullDescription" class="ms-Link" alt="Подробно" title="Подробно">Подробно&nbsp;&nbsp;
+          <i *ngIf="isDescriptionHidden" class="ms-Icon ms-Icon--DoubleChevronDown ms-font-mi"></i>
+          <i *ngIf="!isDescriptionHidden" class="ms-Icon ms-Icon--DoubleChevronUp ms-font-mi"></i>
+        </div>
+
       </div>
+    </div>
 
 
-      <div class="ms-Grid-row">
+    <div class="ms-Grid-row">
 
-        <div class="ms-List-item ms-Grid-col ms-u-sm12">
-          <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{elementsSet.length}}</span>
-            ({{elementsSet.length}})</p>
+      <div class="ms-List-item ms-Grid-col ms-u-sm12">
+        <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{elementsSet.length}}</span>
+          ({{elementsSet.length}})</p>
 
-          <div class="page-heading-xxl">
+        <div class="page-heading-xxl">
 
-            <div class="ms-CommandButton">
-              <button (click)="openAddElement()"
-                      class="ms-Button ms-CommandButton-button">
+          <div class="ms-CommandButton">
+            <button (click)="openAddElement()"
+                    class="ms-Button ms-CommandButton-button">
                             <span class="ms-CommandButton-icon"><i
                               class="ms-Icon ms-Icon--AddTo"></i></span>
-                <span class="ms-CommandButton-label">Создать</span>
-              </button>
-            </div>
-
-            <h1 class="ms-font-xxl">Подчиненные элементы</h1>
+              <span class="ms-CommandButton-label">Создать</span>
+            </button>
           </div>
 
-          <div class="ms-Grid-row">
+          <h1 class="ms-font-xxl">Подчиненные элементы</h1>
+        </div>
 
-            <elements-list-var [itemsList]="elementsSet" (onSetFavorite)="dataChange($event)">
-              Загрузка ...
-            </elements-list-var>
+        <div class="ms-Grid-row">
 
-          </div>
+          <elements-list-var [itemsList]="elementsSet" (onSetFavorite)="dataChange($event)">
+            Загрузка ...
+          </elements-list-var>
 
         </div>
 
-        <!--СООБЩЕНИЯ-->
-        <!--
+      </div>
 
-                <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg4 ms-u-xl4">
-                  <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{messagesSet.length}}</span> ({{messagesSet.length}})</p>
-                  <div class="page-heading">
-                    <div class="ms-PanelExample th-CommandButton">
-                      <button (click)="onCreateMessage()" class="ms-Button th-Button-Icon">
-                        <i class="ms-Icon ms-Icon&#45;&#45;AddTo"></i>
+      <!--СООБЩЕНИЯ-->
+      <!--
+
+              <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg4 ms-u-xl4">
+                <p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{messagesSet.length}}</span> ({{messagesSet.length}})</p>
+                <div class="page-heading">
+                  <div class="ms-PanelExample th-CommandButton">
+                    <button (click)="onCreateMessage()" class="ms-Button th-Button-Icon">
+                      <i class="ms-Icon ms-Icon&#45;&#45;AddTo"></i>
+                    </button>
+                    <div class="ms-Panel ms-Panel&#45;&#45;md">
+                      <button class="ms-Panel-closeButton ms-PanelAction-close">
+                        <i class="ms-Panel-closeIcon ms-Icon ms-Icon&#45;&#45;Cancel"></i>
                       </button>
-                      <div class="ms-Panel ms-Panel&#45;&#45;md">
-                        <button class="ms-Panel-closeButton ms-PanelAction-close">
-                          <i class="ms-Panel-closeIcon ms-Icon ms-Icon&#45;&#45;Cancel"></i>
-                        </button>
-                        <div class="ms-Panel-contentInner">
-                          <p class="ms-Panel-headerText">Medium Panel</p>
-                          <div class="ms-Panel-content">
-                            <span class="ms-font-m">Content goes here</span>
-                          </div>
+                      <div class="ms-Panel-contentInner">
+                        <p class="ms-Panel-headerText">Medium Panel</p>
+                        <div class="ms-Panel-content">
+                          <span class="ms-font-m">Content goes here</span>
                         </div>
                       </div>
                     </div>
-                    <h4>Сообщения</h4>
                   </div>
-
-                  <messages-list [addNoteDialogLocal]="addNotePanel"
-                                 [itemsList]="messagesSet"
-                                 [deleteMessageDialog]="deleteMessageDialog"
-                                 [editMessageDialog]="editMessagePanel">
-                    Загрузка ...
-                  </messages-list>
+                  <h4>Сообщения</h4>
                 </div>
-        -->
 
-        <!--ЗАМЕТКИ-->
-        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
-          <p class="m-b-05 ms-u-textAlignRight"><span
-            class="color-primary">{{notesSet.length}}</span> ({{notesSet.length}})</p>
-          <div class="page-heading">
-            <div class="ms-PanelExample th-CommandButton">
-              <button (click)="onAddNote()"
-                      class="ms-Button th-Button-Icon">
-                <i class="ms-Icon ms-Icon--AddTo"></i>
+                <messages-list [addNoteDialogLocal]="addNotePanel"
+                               [itemsList]="messagesSet"
+                               [deleteMessageDialog]="deleteMessageDialog"
+                               [editMessageDialog]="editMessagePanel">
+                  Загрузка ...
+                </messages-list>
+              </div>
+      -->
+
+      <!--ЗАМЕТКИ-->
+      <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
+        <p class="m-b-05 ms-u-textAlignRight"><span
+          class="color-primary">{{notesSet.length}}</span> ({{notesSet.length}})</p>
+        <div class="page-heading">
+          <div class="ms-PanelExample th-CommandButton">
+            <button (click)="onAddNote()"
+                    class="ms-Button th-Button-Icon">
+              <i class="ms-Icon ms-Icon--AddTo"></i>
+            </button>
+            <div class="ms-Panel ms-Panel--md">
+              <button class="ms-Panel-closeButton ms-PanelAction-close">
+                <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
               </button>
-              <div class="ms-Panel ms-Panel--md">
-                <button class="ms-Panel-closeButton ms-PanelAction-close">
-                  <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
-                </button>
-                <div class="ms-Panel-contentInner">
-                  <p class="ms-Panel-headerText">Medium Panel</p>
-                  <div class="ms-Panel-content">
-                    <span class="ms-font-m">Content goes here</span>
-                  </div>
+              <div class="ms-Panel-contentInner">
+                <p class="ms-Panel-headerText">Medium Panel</p>
+                <div class="ms-Panel-content">
+                  <span class="ms-font-m">Content goes here</span>
                 </div>
               </div>
             </div>
-            <h4>Заметки</h4>
           </div>
-
-          <notes-list [deleteNoteDialog]="deleteNoteDialog"
-                      [editNoteDialog]="editNoteDialog"
-                      [itemsList]="notesSet">Загрузка ...
-          </notes-list>
-
+          <h4>Заметки</h4>
         </div>
 
-        <!--ФАЙЛЫ-->
-        <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
-          <p class="m-b-05 ms-u-textAlignRight"><span
-            class="color-primary">{{attachmentSet.length}}</span> ({{attachmentSet.length}})</p>
-          <div class="page-heading">
-            <div class="ms-PanelExample th-CommandButton">
-              <button (click)="onAddAttachment()"
-                      class="ms-Button th-Button-Icon">
-                <i class="ms-Icon ms-Icon--AddTo"></i>
-              </button>
-              <div class="ms-Panel ms-Panel--md">
-                <button class="ms-Panel-closeButton ms-PanelAction-close">
-                  <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
-                </button>
-                <div class="ms-Panel-contentInner">
-                  <p class="ms-Panel-headerText">Medium Panel</p>
-                  <div class="ms-Panel-content">
-                    <span class="ms-font-m">Content goes here</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <h4>Файлы</h4>
-          </div>
-
-          <files-list [itemsList]="attachmentSet"></files-list>
-
-        </div>
-
-        <div class="ms-u-clearfix"></div>
+        <notes-list [deleteNoteDialog]="deleteNoteDialog"
+                    [editNoteDialog]="editNoteDialog"
+                    [itemsList]="notesSet">Загрузка ...
+        </notes-list>
 
       </div>
+
+      <!--ФАЙЛЫ-->
+      <div class="ms-List-item ms-Grid-col ms-u-sm12 ms-u-md6">
+        <p class="m-b-05 ms-u-textAlignRight"><span
+          class="color-primary">{{attachmentSet.length}}</span> ({{attachmentSet.length}})</p>
+        <div class="page-heading">
+          <div class="ms-PanelExample th-CommandButton">
+            <button (click)="onAddAttachment()"
+                    class="ms-Button th-Button-Icon">
+              <i class="ms-Icon ms-Icon--AddTo"></i>
+            </button>
+            <div class="ms-Panel ms-Panel--md">
+              <button class="ms-Panel-closeButton ms-PanelAction-close">
+                <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
+              </button>
+              <div class="ms-Panel-contentInner">
+                <p class="ms-Panel-headerText">Medium Panel</p>
+                <div class="ms-Panel-content">
+                  <span class="ms-font-m">Content goes here</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h4>Файлы</h4>
+        </div>
+
+        <files-list [itemsList]="attachmentSet"></files-list>
+
+      </div>
+
+      <div class="ms-u-clearfix"></div>
+
     </div>
   </div>
 </main>

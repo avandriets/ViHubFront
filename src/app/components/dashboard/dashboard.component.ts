@@ -26,6 +26,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   elementsSet: ElementVi[] = [];
 
   favoriteSet: Favorite[] = [];
+
+  signalsSet: ElementVi[] = [];
+
   error: any;
   loading: boolean = true;
   spinnerText: string = "Загрузка данных ...";
@@ -78,6 +81,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     this.elementService.getFavorite().then((favorites) => {
       this.favoriteSet = favorites;
+    }).catch((error) => {
+      //console.log(error);
+      this.SetError(error);
+      this.error = error;
+    });
+
+    this.elementService.getSignals().then((signals) => {
+      this.signalsSet = signals;
     }).catch((error) => {
       //console.log(error);
       this.SetError(error);

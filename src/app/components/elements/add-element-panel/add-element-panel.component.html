@@ -36,23 +36,32 @@
       </select>
     </div>
 
+    <!--<div [ngClass]="{'ms-TextField':true, 'ms-TextField&#45;&#45;multiline':true, 'is-required':false, 'is-disabled': inProcess}">-->
+      <!--<label class="ms-Label">Описание</label>-->
+      <!--<textarea-->
+        <!--id="DescriptionIdTextArea" [tinyEditor]-->
+
+        <!--(ngModelChange)="doChangeDescription()"-->
+        <!--[(ngModel)]="description"-->
+        <!--class="ms-TextField-field wysiwyg"-->
+        <!--type="text"-->
+        <!--maxlength="5000">-->
+      <!--</textarea>-->
+    <!--</div>-->
+
     <div [ngClass]="{'ms-TextField':true, 'ms-TextField--multiline':true, 'is-required':false, 'is-disabled': inProcess}">
       <label class="ms-Label">Описание</label>
-      <textarea
-        id="DescriptionIdTextArea" [tinyEditor]
-
-        (ngModelChange)="doChangeDescription()"
-        [(ngModel)]="description"
-        class="ms-TextField-field wysiwyg"
-        type="text"
-        maxlength="5000">
-      </textarea>
+      <simple-tiny
+        [elementId]="'my-editor-id-add'"
+        (onEditorKeyup)="keyUpHandlerFunction($event)"
+      >
+      </simple-tiny>
     </div>
 
   </div>
 
   <div class="ms-Dialog-actions">
-    <button *ngIf="!inProcess" (click)="onCreateElement()"
+    <button *ngIf="!inProcess" (click)="onSaveClick()"
             class="ms-Button  ms-Button--primary">
       <span class="ms-Button-label">Сохранить</span>
     </button>

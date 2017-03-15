@@ -11,10 +11,11 @@ export abstract class BaseDialogNew extends FormViHub implements OnInit {
   spinnerText: string = "Обработка запроса ...";
 
   dialogInstance: any;
-  protected dialogID: string;
+
+  abstract getDialogID(): string;
 
   ngOnInit(): void {
-    let dialog = document.querySelector(this.dialogID);
+    let dialog = document.querySelector(this.getDialogID());
     this.dialogInstance = new this.winRef.nativeWindow.fabric['Dialog'](dialog);
   }
 

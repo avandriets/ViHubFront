@@ -13,10 +13,11 @@ export class Utils {
   public static messageUrl: string = environment.hostUrl + '/rest/messages/';
   public static searchUrl: string = environment.hostUrl + '/vi-hub/search-user/';
   public static attachmentUrl: string = environment.hostUrl + '/rest/attachments/';
+  public static signalsURL: string = environment.hostUrl + '/vi-hub/get-signals';
 
   //Users urls
   public static OauthLoginEndPointUrl = environment.hostUrl + '/o/token/';
-  public static UserURL: string = environment.hostUrl + "/rest/users/";
+  public static UserURL: string = environment.hostUrl + '/rest/users/';
   public static meUserURL: string = environment.hostUrl + '/vi-hub/me';
 
   static getCurrentUser(): UserVi {

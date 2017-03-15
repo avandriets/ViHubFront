@@ -82,17 +82,16 @@ export class ElementsService {
       .get(url, options)
       .toPromise()
       .then((response) => {
-
-        return (response.json() as ElementVi);
+        return ElementVi.createFromJSONObject(response.json() as ElementVi);
       })
       .catch(this.handleError);
   }
 
-  getElements(parent: number): Promise<ElementVi[]> {
+  getElements(parentElement: number): Promise<ElementVi[]> {
 
     let parent_param: string = "-1";
-    if (parent != null) {
-      parent_param = parent.toString();
+    if (parentElement != null) {
+      parent_param = parentElement.toString();
     }
 
     let params = new URLSearchParams();
@@ -181,6 +180,31 @@ export class ElementsService {
       .toPromise()
       .then((response) => {
         return response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  setSignal(id: number): Promise<any> {
+    const url = `${Utils.elementsUrl}${id}/set-signal/`;
+
+    return this.http
+      .post(url, null, {headers: this.headers})
+      .toPromise()
+      .then((response) => {
+        return response.json();
+      })
+      .catch(this.handleError);
+  }
+
+  getSignals(): Promise<ElementVi[]> {
+
+    let options = new RequestOptions({headers: this.headers});
+
+    return this.http
+      .get(Utils.signalsURL, options)
+      .toPromise()
+      .then((response) => {
+        return ElementVi.createFromJsonArray(response.json() as ElementVi[]);
       })
       .catch(this.handleError);
   }

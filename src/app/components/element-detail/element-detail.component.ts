@@ -42,7 +42,7 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   errorMessage: string = "";
   error: any;
 
-  element: ElementVi;
+  element: ElementVi = new ElementVi();
 
   elementsSet: ElementVi[] = [];
 
@@ -51,6 +51,10 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   attachmentSet: Array<Attachment> = [];
 
   breadcrumbs: ElementVi[] = [];
+
+  isFullDescription: boolean = false;
+  isDescriptionHidden: boolean = true;
+  charactersCount: number = 500;
 
   loading: boolean = true;
   spinnerText: string = "Загрузка данных ...";
@@ -98,7 +102,7 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   }
 
   openEditElementPanel(): void {
-    this.editPanelObject.openPanel();
+    this.editPanelObject.openDialog();
   }
 
   onClickDeleteElement(): void {
@@ -141,19 +145,31 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   }
 
   ngAfterViewInit(): void {
-    var CommandButtonElements = document.querySelectorAll(".ms-CommandButton");
-    for (var i = 0; i < CommandButtonElements.length; i++) {
-      new this.winRef.nativeWindow.fabric['CommandButton'](CommandButtonElements[i]);
-    }
 
-    var CommandBarElements = document.querySelectorAll(".ms-CommandBar");
-    for (var i = 0; i < CommandBarElements.length; i++) {
-      new this.winRef.nativeWindow.fabric['CommandBar'](CommandBarElements[i]);
-    }
+    // var CommandButtonElements = document.querySelectorAll(".ms-CommandButton");
+    // for (var i = 0; i < CommandButtonElements.length; i++) {
+    //   new this.winRef.nativeWindow.fabric['CommandButton'](CommandButtonElements[i]);
+    // }
+    //
+    // var CommandBarElements = document.querySelectorAll(".ms-CommandBar");
+    // for (var i = 0; i < CommandBarElements.length; i++) {
+    //   new this.winRef.nativeWindow.fabric['CommandBar'](CommandBarElements[i]);
+    // }
+    //
+    // var DropdownHTMLElements = document.querySelectorAll('.ms-Dropdown');
+    // for (var i = 0; i < DropdownHTMLElements.length; ++i) {
+    //   var Dropdown = new this.winRef.nativeWindow.fabric['Dropdown'](DropdownHTMLElements[i]);
+    // }
 
-    var DropdownHTMLElements = document.querySelectorAll('.ms-Dropdown');
-    for (var i = 0; i < DropdownHTMLElements.length; ++i) {
-      var Dropdown = new this.winRef.nativeWindow.fabric['Dropdown'](DropdownHTMLElements[i]);
+    this.initContextMenu();
+  }
+
+  initContextMenu(): void {
+    var ContextualMenuElements = document.querySelectorAll("#contextMenuDetail");
+    for (var i = 0; i < ContextualMenuElements.length; i++) {
+      var ButtonElement = ContextualMenuElements[i].querySelector(".viHubCommandButton");
+      var ContextualMenuElement = ContextualMenuElements[i].querySelector(".ms-ContextualMenu");
+      new this.winRef.nativeWindow.fabric['ContextualMenu'](ContextualMenuElement, ButtonElement);
     }
   }
 
@@ -163,12 +179,24 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
       let id = +params['id'];
       this.elementService.getElementById(id).then(
         (element) => {
-          this.element = element;
-          this.getData();
-          this.getBeadCrumbs();
+          this.initData(element);
         }
       );
     });
+  }
+
+  initData(currentElement: ElementVi): void {
+    this.element = currentElement;
+    this.initViewOfElement();
+    this.getData();
+    this.getBeadCrumbs();
+  }
+
+  initViewOfElement(): void {
+    if (this.element.description.length > 500)
+      this.isFullDescription = true;
+    else
+      this.isFullDescription = false;
   }
 
   private getBeadCrumbs() {
@@ -207,7 +235,6 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
     });
 
     this.getFiles();
-
   }
 
   getFiles(): void {
@@ -227,4 +254,32 @@ export class ElementDetailComponent implements OnInit, AfterViewInit, AddFileAct
   dataChange(changerData: TransportObject): void {
     this.getData();
   }
+
+  addToFavorite(): void {
+    this.elementService.setFavorite(this.element.element).then((ret) => {
+      this.element.is_favorite = !this.element.is_favorite;
+    }).catch((error) => {
+      this.error = error;
+    });
+  }
+
+  //TODO add implementation setSignal
+  setSignal(): void {
+    this.elementService.setSignal(this.element.element).then((ret) => {
+      this.element.is_signal = !this.element.is_signal;
+    }).catch((error) => {
+      this.error = error;
+    });
+  }
+
+  showMore(): void {
+    if (this.isDescriptionHidden) {
+      this.isDescriptionHidden = false;
+      this.charactersCount = -1;
+    } else {
+      this.isDescriptionHidden = true;
+      this.charactersCount = 500;
+    }
+  }
+
 }

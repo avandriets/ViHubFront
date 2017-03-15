@@ -34,6 +34,9 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
 import { AddFilePanelComponent } from './components/files/add-file-panel/add-file-panel.component';
 import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
 import { TinymceEditorDirective } from './directives/tiny-editor.directive';
+import { ShortTexPipe } from './pipes/short-tex.pipe';
+import { SimpleTinyComponent } from './components/simple-tiny/simple-tiny.component';
+import { SignalsListComponent } from './components/elements/signals-list/signals-list.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { TinymceEditorDirective } from './directives/tiny-editor.directive';
     DeleteItemComponent,
     AddFilePanelComponent,
     FileUploaderComponent,
-    TinymceEditorDirective
+    TinymceEditorDirective,
+    ShortTexPipe,
+    SimpleTinyComponent,
+    SignalsListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,15 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {BasePanel} from "../../../classes/base-objects/base-panel";
+import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
 import {ElementVi} from "../../../classes/base-objects/element-vi";
 import {TransportObject} from "../../../classes/base-objects/transport-object";
 import {ElementsService} from "../../../services/elements.service";
 import {WindowRef} from "../../../services/window-ref.service";
-import {BaseObject} from "../../../classes/base-objects/base-object";
 import {BaseDialogNew} from "../../../classes/base-objects/base-dialog-new";
+import {AddDialogItem} from "../../../classes/base-objects/interfaces";
+import {SimpleTinyComponent} from "../../simple-tiny/simple-tiny.component";
+
+interface AddItem{
+
+}
 
 @Component({
   selector: 'add-element-panel',
@@ -13,10 +17,10 @@ import {BaseDialogNew} from "../../../classes/base-objects/base-dialog-new";
   styleUrls: ['add-element-panel.component.scss']
 })
 
-export class AddElementPanelComponent extends BaseDialogNew {
+export class AddElementPanelComponent extends BaseDialogNew implements AddDialogItem{
 
   @Input() parentElement: ElementVi;
-  @Output() onAddElement = new EventEmitter<TransportObject>();
+  @Output() onDialogActionEvent = new EventEmitter<TransportObject>();
 
   name: string = '';
   description: string = '';
@@ -31,25 +35,13 @@ export class AddElementPanelComponent extends BaseDialogNew {
   constructor(public elementService: ElementsService, public winRef: WindowRef) {
     super(winRef);
     this.spinnerText = "Сохраенение элемента ...";
-    this.dialogID = "#addElementPanelID";
   }
 
-  getEventEmitter(): any {
-    return this.onAddElement;
+  getDialogID(): string {
+    return "#addElementPanelID";
   }
 
-  check_permission(): void {
-  }
-
-  getCurrentObject(): BaseObject {
-    return undefined;
-  }
-
-  doChangeDescription(): void {
-
-  }
-
-  onCreateElement(): void {
+  onSaveClick(): void {
     this.name = this.name.trim();
     this.description = this.description.trim();
 
@@ -78,7 +70,7 @@ export class AddElementPanelComponent extends BaseDialogNew {
         trsObj.type = "Element";
         trsObj.object = (data as ElementVi);
 
-        this.onAddElement.emit(trsObj);
+        this.onDialogActionEvent.emit(trsObj);
 
         this.name = '';
         this.description = '';
@@ -89,12 +81,18 @@ export class AddElementPanelComponent extends BaseDialogNew {
 
         //Close panel
         this.closeDialog();
-        // this.panelInstance.dismiss();
       })
       .catch((error) => {
         this.errorMessage = error;
         this.hasError = true;
         this.inProcess = false;
       });
+  }
+
+  onCancelClick():void{
+  }
+
+  keyUpHandlerFunction(content: string): void {
+    this.description = content;
   }
 }
