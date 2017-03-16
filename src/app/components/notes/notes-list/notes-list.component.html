@@ -1,26 +1,21 @@
 <h2 *ngIf="itemsList.length == 0" class="ms-font-xl">Нет заметок для отображения</h2>
 
 <ul *ngFor="let note of itemsList">
-  <li class="th-active-bar m-b-2">
-    <div class="m-b-1">
-      <span class="ms-fontWeight-semibold">{{ note.first_name }} {{ note.last_name }}</span>
-      {{ note.created_at|date:'dd.MM.yyyy hh:mm' }}
-    </div>
-    <div class="ms-fontSize-l m-b-1">{{ note.body }}</div>
-    <ul class="ms-Card-header-actions">
-      <li data-action-id="favorite" class="ms-Card-action" tabindex="5"><i
+  <li class="m-b-2">
+  <div class="th-icon-link-panel">
+      <div (click)="onEditNoteClick(note)" data-action-id="phone" class="th-icon-link"><i
+        class="ms-Icon ms-Icon--Edit "></i></div>
+      <div (click)="onDeleteNoteClick(note)" data-action-id="video" class="th-icon-link"><i
+        class="ms-Icon ms-Icon--Delete "></i></div>
+      <div data-action-id="favorite" class="th-icon-link" tabindex="5"><i
         [ngClass]="{'ms-Icon':true,'ms-fontColor-red ms-Icon--Lock': note.private_note, ' ms-Icon--Unlock': !note.private_note}"></i>
-      </li>
-    </ul>
-
-    <div class="th-hover-active-bar">
-      <div (click)="onEditNoteClick(note)" data-action-id="phone" class="th-Card-action"><i
-        class="ms-Icon ms-Icon--Edit "></i> Редактировать
-      </div>
-      <div (click)="onDeleteNoteClick(note)" data-action-id="video" class="th-Card-action"><i
-        class="ms-Icon ms-Icon--Delete "></i> Удалить
       </div>
     </div>
+
+
+  <div class="ms-font-xs">{{ note.created_at|date:'dd.MM.yyyy hh:mm' }}</div>
+  <div class="m-b-1">{{ note.first_name }} {{ note.last_name }} </div>
+  <div class="ms-fontSize-l m-b-1">{{ note.body }}</div>
 
     <div *ngIf="note.message" class="ms-Card-actionDetailBox">
       <div class="ms-Card-details is-active">

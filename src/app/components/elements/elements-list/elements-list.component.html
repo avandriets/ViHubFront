@@ -4,7 +4,7 @@
 
 <div *ngIf="elementService.cardView == true" class="yyy1">
   <ul *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
-    <li class="ms-ListItem b-t-1 ms-ListItem--document th-link">
+    <li (click)="gotoDetail(element)" class="ms-ListItem b-t-1 ms-ListItem--document th-link">
       <div class="ms-fontWeight-regular ms-fontSize-l">{{ element.name }}</div>
       <div class="">
         {{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
@@ -15,7 +15,7 @@
         {{ element.getShortDescription() }}
       </div>
 
-      <div (click)="gotoDetail(element)" class="ms-Link ms-u-textAlignRight" alt="Перейти к элементу" title="Перейти к элементу">Перейти ...</div>
+      <div class="ms-Link ms-u-textAlignRight" alt="Перейти к элементу" title="Перейти к элементу">Перейти ...</div>
 
       <div class="ms-ListItem-actions">
         <div (click)="changeFavorite(element)" data-action-id="favorite" class="ms-ListItem-action"
