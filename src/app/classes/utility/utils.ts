@@ -4,7 +4,7 @@ import {environment} from '../../../environments/environment';
 export class Utils {
 
   //Constants
-  public static siteName: string = "ViHub";
+  public static siteName: string = "Cytellect";
 
   //URLs
   public static elementsUrl: string = environment.hostUrl + '/rest/elements/';
