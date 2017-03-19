@@ -1,34 +1,32 @@
 <div *ngIf="itemsList.length == 0" class="ms-Grid-col ms-u-sm12 m-b-2 ms-fontSize-l">
   Нет элементов для отображения
 </div>
-
-<div class="yyy1">
-  <ul *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
-    <li (click)="gotoDetail(element)" class="ms-ListItem b-t-pr-1 ms-ListItem--document th-link">
-      <div class="ms-fontWeight-regular ms-fontSize-l">{{ element.name }}</div>
-      <div class="">
-        {{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
-        {{ element.first_name }} {{ element.last_name }}
-      </div>
-      <div>&nbsp;</div>
-      <div class="ms-fontSize-l">
-        {{ element.getShortDescription() }}
-      </div>
-
-      <div class="ms-Link ms-u-textAlignRight" alt="Перейти к элементу" title="Перейти к элементу">Перейти ...</div>
-
-      <div class="ms-ListItem-actions">
-        <div class="ms-ListItem-action"
-             alt="Сигнал" title="Сигнал" tabindex="4"><i
-          [ngClass]="{'ms-Icon ms-Icon--Location': true, 'ms-Icon--LocationFill ms-fontColor-red': element.is_signal}"></i>
+<div *ngFor="let element of itemsList" class="ms-Grid-col ms-u-sm12 ms-u-md6 ms-u-xl4 ms-u-xxl4">
+  <div class="th-card">
+    <div class="th-card-header with-border">
+      <div class="ms-Persona ms-Persona--sm">
+        <div class="ms-Persona-imageArea">
+          <div class="ms-Persona-initials ms-Persona-initials--blue">{{element.getSignature()}}</div>
         </div>
-
-        <div (click)="changeFavorite(element)" data-action-id="favorite" class="ms-ListItem-action"
+        <div class="ms-Persona-details">
+          <div class="ms-font-xs">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}</div>
+          <div>{{ element.first_name }} {{ element.last_name }}</div>
+        </div>
+      </div>
+      <div class="ms-Icon-actions">
+        <div class="th-icon-link" alt="Сигнал" title="Сигнал" tabindex="4"><i
+          [ngClass]="{'ms-Icon ms-Icon--LightningBolt': true, 'ms-fontColor-red': element.is_signal}"></i>
+        </div>
+        <div (click)="changeFavorite(element)" data-action-id="favorite" class="th-icon-link"
              alt="Добавить в избранное" title="Добавить в избранное" tabindex="5"><i
           [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i>
         </div>
       </div>
-    </li>
-  </ul>
-
+    </div>
+    <div (click)="gotoDetail(element)" class="th-card-body th-card-link">
+      <div class="ms-fontWeight-regular ms-fontSize-l">{{ element.name }}</div>
+      <div>{{ element.getShortDescription() }}</div>
+    </div>
+  </div>
 </div>
+

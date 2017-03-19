@@ -38,9 +38,8 @@
             <li *ngFor="let user of foundMembersList" class="ms-PeoplePicker-selectedPerson " tabindex="1">
               <div class="ms-Persona ms-Persona--sm">
                 <div class="ms-Persona-imageArea">
-                  <div class="ms-Persona-initials ms-Persona-initials--blue">RM</div>
+                  <div class="ms-Persona-initials ms-Persona-initials--blue">{{user.getSignature()}}</div>
                 </div>
-                <div class="ms-Persona-presence"></div>
                 <div class="ms-Persona-details">
                   <div class="ms-Persona-primaryText">{{ user.first_name }} {{ user.last_name }}</div>
                   <div class="ms-Persona-secondaryText">{{ user.email }}</div>
@@ -63,9 +62,8 @@
             <li *ngFor="let user of membersList" class="ms-PeoplePicker-selectedPerson " tabindex="1">
               <div class="ms-Persona ms-Persona--sm">
                 <div class="ms-Persona-imageArea">
-                  <div class="ms-Persona-initials ms-Persona-initials--blue">RM</div>
+                  <div class="ms-Persona-initials ms-Persona-initials--blue">{{user.getSignature()}}</div>
                 </div>
-                <div class="ms-Persona-presence"></div>
                 <div class="ms-Persona-details">
                   <div class="ms-Persona-primaryText">{{ user.first_name }} {{ user.last_name }}</div>
                   <div class="ms-Persona-secondaryText">{{ user.email }}</div>

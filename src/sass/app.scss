@@ -6,13 +6,14 @@ $text-color-primary:  unquote("rgba(0, 0, 0, 0.87)") !default;//green; //
 $text-color-secondary: unquote("rgba(0, 0, 0, 0.54)") !default;
 $color-primary: #0078d7;
 $color-primary-dark: #106ebe;
-$border: rgba(0,0,0,0.4);
+$border: #f4f4f4;
 //$color-accent: '$color-accent';
 
 body{
   min-width: 320px;
   font-size: 14px;
   line-height: 1.2;
+ // background: $ms-color-neutralLight;
   color: $text-color-primary;
   font-weight: 300;
   font-family: Segoe UI WestEuropean,Segoe UI,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
@@ -86,8 +87,7 @@ header{
   height: $header-height;
   z-index: 1;
   border-bottom: 1px solid rgba(0,0,0,.14);
-  //    -webkit-box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
-  //   box-shadow: 0 2px 4px -1px rgba(0,0,0,0.06), 0 4px 5px 0 rgba(0,0,0,0.06), 0 1px 10px 0 rgba(0,0,0,0.08);
+
   .th-Header-banner{
     padding: 0 32px;
   }
@@ -455,10 +455,9 @@ header{
   z-index: 15;
   transition: all 0.3s;
   min-width: 320px;
-  width: 30%;
+  width: 50%;
   box-shadow: -30px 0 30px -30px rgba(0, 0, 0, .2);
   box-sizing: border-box;
-  margin-right: 15px;
   &.is-open {
     right: 0;
   }
@@ -650,3 +649,32 @@ header{
   }
 }
 
+// -------------
+.ms-Icon-actions{
+  display: flex;
+  align-items: center;
+}
+.th-card{
+  background-color: $ms-color-white;
+    margin-bottom: 20px;
+    width: 100%;
+  .th-card-link{
+    cursor: pointer;
+  }
+}
+.th-card-header {
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.with-border {
+    border-bottom: 1px solid $border;
+  }
+  .ms-Persona{
+    width: auto;
+  }
+}
+.th-card-body {
+    padding-top: 10px;
+}

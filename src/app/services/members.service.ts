@@ -70,7 +70,7 @@ export class MembersService {
     return this.http
       .get(Utils.searchUrl, options)
       .toPromise()
-      .then(res => res.json())
+      .then(res => UserVi.createFromJsonArray(res.json()))
       .catch(this.handleError);
   }
 

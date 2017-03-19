@@ -35,58 +35,48 @@
       </div>
     </div>
 
-    <div class="page-heading-xxl th-active-bar">
-      <div class="m-b-1">
-
-        <div>
-          <button (click)="addToFavorite()" class="ms-CommandButton-button">
-            <span class="ms-CommandButton-icon">
-              <i [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i>
-            </span>
-            <span class="ms-CommandButton-label">В избранное</span>
-          </button>
-          <button (click)="setSignal()" class="ms-CommandButton-button">
-            <span class="ms-CommandButton-icon">
-              <i [ngClass]="{'ms-Icon ms-Icon--Location': true, 'ms-Icon--LocationFill ms-fontColor-red': element.is_signal}" ></i>
-            </span>
-            <span class="ms-CommandButton-label">Сигнал</span>
-          </button>
+    <!--  -->
+    <div class="th-card">
+      <div class="th-card-header with-border">
+        <div class="ms-Persona ms-Persona--sm">
+          <div class="ms-Persona-imageArea">
+            <div class="ms-Persona-initials ms-Persona-initials--blue">{{element.getSignature()}}</div>
+          </div>
+          <div class="ms-Persona-details">
+            <div class="ms-font-xs">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}</div>
+            <div>{{ element.first_name }} {{ element.last_name }}</div>
+          </div>
         </div>
-
-        <div id="contextMenuDetail" class="ms-CommandButton tm-CommandButton">
-          <button class="ms-Button ms-CommandButton-button viHubCommandButton">
-            <span class="ms-CommandButton-label">&nbsp;&nbsp;Действия</span>
-            <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--More"></i></span>
-          </button>
-          <ul class="ms-ContextualMenu is-hidden">
-            <li (click)="openEditElementPanel()" class="ms-ContextualMenu-item">
-              <a class="ms-ContextualMenu-link" tabindex="1">Редактировать</a>
-            </li>
-            <li (click)="onClickDeleteElement(element)" class="ms-ContextualMenu-item">
-              <a class="ms-ContextualMenu-link" tabindex="1">Удалить</a>
-            </li>
-            <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
-            <li (click)="onClickMembersView(element)" class="ms-ContextualMenu-item">
-              <a class="ms-ContextualMenu-link" tabindex="1">Пользователи</a>
-            </li>
-          </ul>
+        <div class="ms-Icon-actions">
+          <div (click)="addToFavorite()" class="th-icon-link"><i [ngClass]="{'ms-Icon ms-Icon--FavoriteStar': true, 'ms-Icon--FavoriteStarFill ms-fontColor-red': element.is_favorite}"></i></div>
+          <div (click)="setSignal()" class="th-icon-link"><i [ngClass]="{'ms-Icon ms-Icon--LightningBolt': true, 'ms-fontColor-red': element.is_signal}"></i></div>
+          <div id="contextMenuDetail" class="ms-CommandButton tm-CommandButton ">
+            <button class="ms-Button ms-CommandButton-button viHubCommandButton">
+              <span class="ms-CommandButton-label">Действия</span>
+              <span class="ms-CommandButton-icon"><i class="ms-Icon ms-Icon--More"></i></span>
+            </button>
+            <ul class="ms-ContextualMenu is-hidden">
+              <li (click)="openEditElementPanel()" class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Редактировать</a>
+              </li>
+              <li (click)="onClickDeleteElement(element)" class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Удалить</a>
+              </li>
+              <li class="ms-ContextualMenu-item ms-ContextualMenu-item--divider"></li>
+              <li (click)="onClickMembersView(element)" class="ms-ContextualMenu-item">
+                <a class="ms-ContextualMenu-link" tabindex="1">Пользователи</a>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        <div class="ms-fontSize-xxl">{{ element.name }}</div>
-        <div class="m-b-1">{{ element.created_at|date:'dd.MM.yyyy hh:mm' }}
-          {{ element.first_name }} {{ element.last_name }}
-        </div>
-
-
-        <div class="ms-fontSize-l m-b-1">
-          <div innerHTML="{{ element.description|shortTex:charactersCount }}"></div>
-        </div>
-
+      </div>
+      <div class="th-card-body">
+        <div class="ms-fontSize-xxl m-b-1">{{ element.name }}</div>
+        <div class="m-b-1" innerHTML="{{ element.description|shortTex:charactersCount }}"></div>
         <div (click)="showMore()" *ngIf="isFullDescription" class="ms-Link" alt="Подробно" title="Подробно">Подробно&nbsp;&nbsp;
           <i *ngIf="isDescriptionHidden" class="ms-Icon ms-Icon--DoubleChevronDown ms-font-mi"></i>
           <i *ngIf="!isDescriptionHidden" class="ms-Icon ms-Icon--DoubleChevronUp ms-font-mi"></i>
         </div>
-
       </div>
     </div>
 
@@ -95,7 +85,7 @@
 
       <div class="ms-List-item ms-Grid-col ms-u-sm12">
         <!--<p class="m-b-05 ms-u-textAlignRight"><span class="color-primary">{{elementsSet.length}}</span>-->
-          <!--({{elementsSet.length}})</p>-->
+        <!--({{elementsSet.length}})</p>-->
 
         <div class="page-heading-xxl">
 
@@ -161,10 +151,9 @@
           class="color-primary">{{notesSet.length}}</span> ({{notesSet.length}})</p>
         <div class="page-heading">
           <div class="ms-PanelExample th-CommandButton">
-            <button (click)="onAddNote()"
-                    class="ms-Button th-Button-Icon">
+            <div (click)="onAddNote()" class="th-icon-link">
               <i class="ms-Icon ms-Icon--AddTo"></i>
-            </button>
+            </div>
             <div class="ms-Panel ms-Panel--md">
               <button class="ms-Panel-closeButton ms-PanelAction-close">
                 <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
@@ -193,10 +182,9 @@
           class="color-primary">{{attachmentSet.length}}</span> ({{attachmentSet.length}})</p>
         <div class="page-heading">
           <div class="ms-PanelExample th-CommandButton">
-            <button (click)="onAddAttachment()"
-                    class="ms-Button th-Button-Icon">
+            <div (click)="onAddAttachment()" class="th-icon-link">
               <i class="ms-Icon ms-Icon--AddTo"></i>
-            </button>
+            </div>
             <div class="ms-Panel ms-Panel--md">
               <button class="ms-Panel-closeButton ms-PanelAction-close">
                 <i class="ms-Panel-closeIcon ms-Icon ms-Icon--Cancel"></i>
